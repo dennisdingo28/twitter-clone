@@ -1,20 +1,26 @@
+"use client";
+
 import {useForm} from "react-hook-form";
-import Input from "../ui/input";
+import FormInput from "../ui/formInput";
+import { useState, useEffect } from "react";
+import { toast } from "react-hot-toast";
+import { SignInValidator, SignInRequest } from "@/validators";
+import loginAccount from "@/lib/loginAccount";
 
 const LoginForm = () => {
-  const {register, handleSubmit, formState:{errors}} = useForm();
+  const [showErrorMessage,setShowErrorMessage] = useState<boolean>(false);
 
+  const {register, handleSubmit, formState:{errors}} = useForm({
+    defaultValues:{
+      identifier:"",
+      password:"",
+    }
+  });
     return (
-    <form>
+    <form onSubmit={handleSubmit(data=>loginAccount(data))}>
         <div className="flex flex-col gap-3">
-            <div className="relative">
-                <Input id="username" className="peer w-full"/>
-                <label className="absolute left-1 top-[50%] peer-focus:text-[.9em] text-[.95em] peer-focus:top-[13px] peer-focus:text-lightBlue -translate-y-[50%]" htmlFor="username">Username</label>
-            </div>
-            <div className="relative">
-                <Input id="password" className="peer w-full"/>
-                <label className="absolute left-1 top-[50%] peer-focus:text-[.9em] text-[.95em] peer-focus:top-[13px] peer-focus:text-lightBlue -translate-y-[50%]" htmlFor="username">Password</label>
-            </div>
+          <FormInput name="username or email" placeholder="username / email" show={errors.identifier ? true:false} errMessage={errors.identifier?.message || ""} register={register}/>
+          <FormInput name="password" placeholder="password" show={errors.password ? true:false} errMessage={errors.password?.message || ""} register={register}/>
         </div>
     </form>
   )

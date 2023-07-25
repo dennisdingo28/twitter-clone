@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {useForm} from "react-hook-form";
 import Button from "../ui/button";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -12,15 +12,15 @@ import { toast } from "react-hot-toast";
 const RegisterForm = () => {
     const [showErrorMessage,setShowErrorMessage] = useState<boolean>(false);
 
-  const {register, handleSubmit, formState:{errors}} = useForm({
-    resolver:zodResolver(SignUpValidator),
-    defaultValues:{
-        username:"",
-        email:"",
-        password:"",
-    }
-  });
-  console.log(errors);
+    const {register, handleSubmit, formState:{errors}} = useForm({
+      resolver:zodResolver(SignUpValidator),
+      defaultValues:{
+          username:"",
+          email:"",
+          password:"",
+      }
+    });
+    console.log(errors);
   
   
   const {mutate:createUser, isLoading} = useMutation({
