@@ -9,16 +9,17 @@ interface ModalProps {
     modalDescription?: string;
     children?: React.ReactNode;
     isOpen: boolean;
+    onClose: ()=> void;
     setOpen: (open: boolean) =>void;
 }
 
-const Modal: React.FC<ModalProps> = ({modalTitle,modalDescription,children,isOpen,setOpen}) => {
+const Modal: React.FC<ModalProps> = ({modalTitle,onClose,modalDescription,children,isOpen,setOpen}) => {
 
 
   return (
     <Dialog
       open={isOpen}
-      onClose={() => setOpen(false)}
+      onClose={()=>onClose()}
       className="relative z-50"
     >
 

@@ -23,9 +23,8 @@ const Button: React.ForwardRefExoticComponent<React.PropsWithoutRef<ButtonProps>
     { className, variant, ...props }: ButtonProps,
     ref: ForwardedRef<HTMLButtonElement>,
 ) => {
-    // Manually set the default class if no variant is provided
     const variantClass = variant;
-    return <button ref={ref} className={cn(buttonVariants({variant}),className)}>{props.children}</button>;
+    return <button ref={ref} className={cn(buttonVariants({variant}),className)} {...props}>{props.children}</button>;
 });
 
 export default Button;
