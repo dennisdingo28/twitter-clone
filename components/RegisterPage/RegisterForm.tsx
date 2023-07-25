@@ -27,10 +27,10 @@ const RegisterForm = () => {
     mutationFn: async (data: SignUpRequest) => await createAccount(data),
     onSuccess:(data: any)=>{
         console.log("created",data);
-        toast.success("created")
+        toast.success(data.msg)
     },
     onError:(err: any)=>{
-        console.log((err as Error).message);
+        toast.error(err.response.data)
     }
     })
 
@@ -54,7 +54,7 @@ const RegisterForm = () => {
             <FormInput name="email" placeholder="email" show={errors.email ? true:false} errMessage={errors.email?.message || ""} register={register}/>
             <FormInput name="password" placeholder="password" show={errors.password ? true:false} errMessage={errors.password?.message || ""} register={register}/>
         </div>
-        <Button className="w-full mt-4 p-2 rounded-sm">Create account</Button>
+        <Button className={`w-full mt-4 p-2 rounded-sm ${isLoading && "pointer-events-none bg-darkBlue text-gray-300"}`}>Create account</Button>
     </form>
   )
 }
