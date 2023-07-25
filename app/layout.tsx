@@ -2,6 +2,8 @@ import QueryProvider from '@/providers/QueryProvider'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import ToasterProivder from '@/providers/ToastProvider'
+import { LoginModalProvider } from '@/providers/LoginModalProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <QueryProvider>
+        <ToasterProivder/>
         <body className="bg-black text-white">
           {children}
         </body>

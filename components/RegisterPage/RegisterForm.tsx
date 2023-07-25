@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import createAccount from "@/lib/createAccount";
 import FormInput from "../ui/formInput";
+import { toast } from "react-hot-toast";
 
 const RegisterForm = () => {
     const [showErrorMessage,setShowErrorMessage] = useState<boolean>(false);
@@ -25,7 +26,8 @@ const RegisterForm = () => {
   const {mutate:createUser, isLoading} = useMutation({
     mutationFn: async (data: SignUpRequest) => await createAccount(data),
     onSuccess:(data: any)=>{
-        console.log("created");
+        console.log("created",data);
+        toast.success("created")
     },
     onError:(err: any)=>{
         console.log((err as Error).message);
