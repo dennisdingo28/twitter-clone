@@ -50,9 +50,9 @@ const RegisterForm = () => {
     return (
     <form onSubmit={handleSubmit((data)=>createUser(data))}>
         <div className="flex flex-col gap-3">
-            <FormInput name="username" placeholder="username" show={errors.username ? true:false} errMessage={errors.username?.message || ""} register={register}/>
-            <FormInput name="email" placeholder="email" show={errors.email ? true:false} errMessage={errors.email?.message || ""} register={register}/>
-            <FormInput name="password" placeholder="password" show={errors.password ? true:false} errMessage={errors.password?.message || ""} register={register}/>
+            <FormInput name="username" placeholder="username" show={showErrorMessage} errMessage={errors.username?.message || ""} register={register}/>
+            <FormInput name="email" placeholder="email" show={showErrorMessage} errMessage={errors.email?.message || ""} register={register}/>
+            <FormInput name="password" placeholder="password" show={showErrorMessage} errMessage={errors.password?.message || ""} register={register}/>
         </div>
         <Button className={`w-full mt-4 p-2 rounded-sm ${isLoading && "pointer-events-none bg-darkBlue text-gray-300"}`}>Create account</Button>
     </form>
