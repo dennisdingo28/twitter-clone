@@ -79,18 +79,22 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, account }) {
+      console.log(token);
+      
       const existingUser = await prismadb.user.findUnique({where:{email: token.email || "" }});
-      token.name=existingUser?.username;
-      token.picture=existingUser?.imageUrl;
-
-      if(!existingUser){
-        await prismadb.user.create({
+      if(existingUser){
+        token.name=existingUser?.username;
+        token.picture=existingUser?.imageUrl;
+      }else{
+        const newUser = await prismadb.user.create({
             data:{
                 username: token.name!,
                 email: token.email!,
                 imageUrl: token.picture!,
             }
         });
+        token.name=newUser?.username;
+        token.picture=newUser?.imageUrl;
       }
       const userJwt = generateJWT({
         username: token.name!,
@@ -117,6 +121,7 @@ export const authOptions: NextAuthOptions = {
       if (session.user && currentUser) {
         session.user.id = String(currentUser.id);
       }
+      
       return session;
     },
   },

@@ -31,7 +31,7 @@ const Modal: React.FC<ModalProps> = ({modalTitle,onClose,modalDescription,childr
             }}>
                 <X size={50} className='hover:bg-[#191919] duration-100 rounded-full p-2 cursor-pointer'/>
                 <div className="flex-1 flex justify-center">
-                    <Logo className='bg-lightGray'/>
+                    <Logo/>
                 </div>
             </div>
           <div className={"mt-3"}>
