@@ -5,7 +5,7 @@ interface UserImageProps {
 }
 
 const UserImage: React.FC<UserImageProps> = ({imgUrl}) => {
-  return <Image src={imgUrl} width={45} height={45} alt="profile image" className="rounded-full object-cover"/>
+  return <Image src={imgUrl} width={50} height={40} alt="profile image" className="rounded-full object-cover"/>
 }
 
 export default UserImage

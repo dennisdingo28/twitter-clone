@@ -1,10 +1,15 @@
 "use client";
 import { signOut } from "next-auth/react";
 import Button from "./ui/button";
+import { HTMLAttributes } from "react";
 
-const SignOut = () => {
+interface SignOutButton extends HTMLAttributes<HTMLButtonElement>{
+  children: React.ReactNode;
+}
+
+const SignOut: React.FC<SignOutButton> = ({children,className,...props}) => {
   return (
-    <Button onClick={()=>signOut()}>sign out</Button>
+    <Button className={className} onClick={()=>signOut()} {...props}>{children}</Button>
   )
 }
 
