@@ -1,3 +1,5 @@
+import Content from "@/components/HomePage/Content";
+import PanelSide from "@/components/HomePage/PanelSide";
 import SignOut from "@/components/SignOut";
 import { getAuthSession } from "@/lib/authOptions"
 export default async function Home() {
@@ -6,10 +8,11 @@ export default async function Home() {
   
   return (
    <main>
-    <div className="container mx-auto bg-red-500">
-      <img src="/twitter-logo.png"/>
-      <SignOut/>
+    <div className="">
+      <PanelSide/>
     </div>
+    <Content/>
+    
    </main>
-  )
+  ) 
 }
