@@ -14,7 +14,7 @@ const Header:React.FC = async () => {
       </div>
       <div className="pb-2 w-full">
           <Audience/>
-          <TweetPlaceholder/>
+          <TweetPlaceholder user={session?.user}/>
       </div>
           
 

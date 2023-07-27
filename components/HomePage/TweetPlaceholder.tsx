@@ -5,18 +5,41 @@ import Button from "../ui/button"
 import { useState } from "react"
 import { CldUploadWidget } from "next-cloudinary";
 import Image from "next/image";
+import { useMutation } from "@tanstack/react-query";
+import { TweetRequest } from "@/validators";
+import axios from "axios";
+import { User } from "next-auth";
+import { toast } from "react-hot-toast";
 
+interface TweetPlaceholderProps {
+  user: User | undefined;
+}
 
-const TweetPlaceholder = () => {
+const TweetPlaceholder: React.FC<TweetPlaceholderProps> = ({user}) => {
     const [postValue,setPostValue] = useState("");
     const [image,setImage] = useState("");
-    console.log("img",image);
 
     const onUpload = (result: any) =>{
       console.log(result);
       
       setImage(result.info.secure_url)
   }
+
+
+
+  const {mutate: createTweet, isLoading} = useMutation({
+    mutationFn: async (data: TweetRequest) => {
+      const newTweet = await axios.post('/api/tweet',data);
+    },
+    onSuccess:()=>{
+      toast.success("tweet created");
+    },
+    onError:()=>{
+      toast.error("Tweet was not created");
+    }
+  })
+
+
   return (
     <div className="">
         <input value={postValue} onChange={(e)=>setPostValue(e.target.value)} className='mb-4 bg-transparent outline-none px-1 py-2 w-full' placeholder='What is happening?!'/>
@@ -35,7 +58,7 @@ const TweetPlaceholder = () => {
                 <ScanFaceIcon size={40} className="text-darkBlue text-sm hover:bg-[#031019] cursor-pointer rounded-full p-2"/>
                 <LocateFixed size={40} className="text-darkBlue text-sm hover:bg-[#031019] cursor-pointer rounded-full p-2"/>
             </div>
-            <Button className={`rounded-xl py-1 px-3 ${postValue.trim()==='' && image.trim()==='' ? "bg-darkBlue text-gray-400 pointer-events-none":""}`}>Tweet</Button>
+            <Button onClick={()=>createTweet({tweetDescription: postValue, uploadUrl: image, userId:user?.id!})} className={`rounded-xl py-1 px-3 ${(postValue.trim()==='' && image.trim()==='') || isLoading ? "bg-darkBlue text-gray-400 pointer-events-none":""}`}>{!isLoading ? "Tweet":"Tweeting..."}</Button>
         </div>
         {image.trim()!=="" && 
         <div className="flex items-center justify-center mt-4">
