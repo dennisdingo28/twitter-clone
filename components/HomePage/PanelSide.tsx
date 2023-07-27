@@ -19,16 +19,16 @@ const PanelSide = () => {
               <NavItem icon={<Home size={30}/>} label='Home' link="/"/>
             </div>
             <div className='cursor-pointer hover:bg-[rgba(255,255,255,.2)] rounded-full p-3 duration-200'>
-              <NavItem icon={<Search size={30}/>} label='Explore' link="/"/>
+              <NavItem icon={<Search size={30}/>} label='Explore' link="/explore"/>
             </div>
             <div className='cursor-pointer hover:bg-[rgba(255,255,255,.2)] rounded-full p-3 duration-200'>
-              <NavItem icon={<Bookmark size={30}/>} label='Bookmarks' link="/"/>
+              <NavItem icon={<Bookmark size={30}/>} label='Bookmarks' link="/bookmarks"/>
             </div>
             <div className='cursor-pointer hover:bg-[rgba(255,255,255,.2)] rounded-full p-3 duration-200'>
-              <NavItem icon={<Users2Icon size={30}/>} label='Communities' link="/"/>
+              <NavItem icon={<Users2Icon size={30}/>} label='Communities' link="/communities"/>
             </div>
             <div className='cursor-pointer hover:bg-[rgba(255,255,255,.2)] rounded-full p-3 duration-200'>
-              <NavItem icon={<User size={30}/>} label='Profile' link="/"/>
+              <NavItem icon={<User size={30}/>} label='Profile' link="/profile"/>
             </div>
           </div>
           <Button className='w-full p-3 rounded-full mt-5'>Tweet</Button>
