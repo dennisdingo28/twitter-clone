@@ -14,7 +14,7 @@ const Popover: React.FC<PopoverProps> = ({label}) => {
         <div className="hover:bg-[rgba(255,255,255,0.1)]">
             <div className="p-3">
                 <Link href={"/login"} >
-                    <Paragraph className="font-bold text-sm">Add an existing account</Paragraph>
+                    <Paragraph className="font-bold text-sm whitespace-nowrap">Add an existing account</Paragraph>
                 </Link>
             </div>
         </div>
