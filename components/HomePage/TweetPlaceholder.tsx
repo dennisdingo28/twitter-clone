@@ -30,12 +30,16 @@ const TweetPlaceholder: React.FC<TweetPlaceholderProps> = ({user}) => {
   const {mutate: createTweet, isLoading} = useMutation({
     mutationFn: async (data: TweetRequest) => {
       const newTweet = await axios.post('/api/tweet',data);
+      return newTweet.data;
     },
-    onSuccess:()=>{
-      toast.success("tweet created");
+    onSuccess:(data)=>{      
+      toast.success(data.msg);
     },
-    onError:()=>{
-      toast.error("Tweet was not created");
+    onError:(err: any)=>{
+      if(err.response.data)
+        toast.error(err.response.data);
+      else
+        toast.error("Something went wrong while trying to create the tweet");
     }
   })
 

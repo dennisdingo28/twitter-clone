@@ -14,7 +14,7 @@ export async function POST(req: NextRequest){
             ...newTweet
         }});
         
-        return NextResponse.json({msg:"Tweet was successfully posted!",ok:true},{status:200});
+        return NextResponse.json({msg:"Tweet was successfully created!",ok:true},{status:200});
     }catch(err){
         console.log(err);
         if(err instanceof ZodError){
