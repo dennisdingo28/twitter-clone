@@ -18,4 +18,15 @@ model User {
   email String @unique
   password String?
   imageUrl String @default("/defaultProfile.png")
+  tweets Tweet[] @relation("TweetToUser")
+}
+
+model Tweet {
+  id String @id @default(uuid())
+  userId String
+  user User @relation("TweetToUser",fields: [userId],references: [id])
+  tweetDescription String
+  uploadUrl String
+
+  @@index([userId])
 }

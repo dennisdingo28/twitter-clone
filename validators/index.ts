@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { ZodError } from "zod";
 
 export const SignUpValidator = z.object({
     username: z.string().min(2,"The username must be at least 2 characters long !"),
@@ -15,3 +16,26 @@ export const SignInValidator = z.object({
 });
 
 export type SignInRequest = z.infer<typeof SignInValidator>;
+
+
+
+export const TweetValidator = z.object({
+
+    tweetDescription: z.optional(z.string()),
+    uploadUrl: z.optional(z.string()),
+    userId: z.string(),
+
+  }).refine((data) => {
+    if (!data.tweetDescription && !data.uploadUrl) {
+        throw new ZodError([
+          {
+            code:"custom",
+            message: "Either tweetDescription or uploadUrl must be provided.",
+            path: ["tweetDescription"],
+          },
+        ]);
+      }
+    return true;
+  });
+  
+  export type TweetRequest = z.infer<typeof TweetValidator>;
