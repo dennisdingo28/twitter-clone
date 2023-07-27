@@ -8,7 +8,7 @@ import Button from '../ui/button'
 
 const PanelSide = () => {
   return (
-    <div className='pb-5 border-r lg:pr-6 border-darkGray max-w-fit'>
+    <div className='pb-5 border-r h-full lg:pr-6 border-darkGray flex-1'>
       <div className="flex h-[100%] flex-col items-center justify-between">
         <div className="">
           <Link href="/" className='xl:flex items-center justify-center'>

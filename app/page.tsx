@@ -11,12 +11,13 @@ export default async function Home() {
    <main className="h-screen">
     <Container>
       <div className="flex h-screen">
-        <div className="flex justify-center">
+        <div className="lg:flex-1">
           <PanelSide/>
         </div>
+
         <Content/>
 
-        <div className="hidden lg:flex flex-1  justify-center ">
+        <div className="hidden lg:flex flex-1 justify-center ">
           <InfoPanel/>
         </div>
       </div>

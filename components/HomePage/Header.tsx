@@ -2,6 +2,7 @@ import UserImage from '@/components/ui/user-image'
 import { getAuthSession } from '@/lib/authOptions'
 import React from 'react'
 import { Audience } from './Audience';
+import TweetPlaceholder from './TweetPlaceholder';
 
 
 const Header:React.FC = async () => {
@@ -11,9 +12,9 @@ const Header:React.FC = async () => {
       <div className="">
         <UserImage imgUrl={String(session?.user?.image)}/>
       </div>
-      <div className="">
+      <div className="pb-2 w-full">
           <Audience/>
-          <input className='bg-transparent outline-none' placeholder='What is happening?!'/>
+          <TweetPlaceholder/>
       </div>
           
 

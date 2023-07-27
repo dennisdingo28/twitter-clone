@@ -1,7 +1,7 @@
 
 const InfoPanel = () => {
   return (
-    <div>InfoPanel</div>
+    <div className="flex-1">InfoPanel</div>
   )
 }
 
