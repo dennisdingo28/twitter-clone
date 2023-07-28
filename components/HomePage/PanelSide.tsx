@@ -8,7 +8,7 @@ import Button from '../ui/button'
 
 const PanelSide = () => {
   return (
-    <div className='pb-5 border-r h-full lg:pr-6 border-darkGray flex-1'>
+    <div className='pb-5 border-r h-full border-darkGray flex-1'>
       <div className="flex h-[100%] flex-col items-center justify-between">
         <div className="">
           <Link href="/" className='xl:flex items-center justify-center'>
@@ -31,7 +31,7 @@ const PanelSide = () => {
               <NavItem icon={<User size={30}/>} label='Profile' link="/profile"/>
             </div>
           </div>
-          <Button className='w-full p-3 rounded-full mt-5'>Tweet</Button>
+          <Button className='w-full p-3 rounded-full mt-5 hidden sm:block'>Tweet</Button>
         </div>
         
         <div className="justify-self-end">

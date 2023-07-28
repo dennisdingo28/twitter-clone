@@ -46,7 +46,7 @@ const TweetPlaceholder: React.FC<TweetPlaceholderProps> = ({user}) => {
 
   return (
     <div className="">
-        <input value={postValue} onChange={(e)=>setPostValue(e.target.value)} className='mb-4 bg-transparent outline-none px-1 py-2 w-full' placeholder='What is happening?!'/>
+        <input value={postValue} onChange={(e)=>setPostValue(e.target.value)} className='mb-4 bg-transparent outline-none px-1 py-2 w-full text-[1.1em]' placeholder='What is happening?!'/>
         <div className="flex justify-between">
             <div className="flex">
             <CldUploadWidget onUpload={onUpload} uploadPreset="h7trytjb">

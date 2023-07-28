@@ -9,8 +9,8 @@ const Header:React.FC = async () => {
   const session = await getAuthSession();
   return (
     <div className='flex gap-3'>
-      <div className="">
-        <UserImage imgUrl={String(session?.user?.image)}/>
+      <div className="  ">
+        <UserImage imgUrl={String(session?.user?.image)} className="w-[43px] h-[40px]"/>
       </div>
       <div className="pb-2 w-full">
           <Audience/>
