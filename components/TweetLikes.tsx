@@ -14,7 +14,8 @@ interface TweetLikeProps {
       user: UserClient;
     };
     user: User | undefined;
-  }
+}
+
 const TweetLikes:React.FC<TweetLikeProps> = ({tweet,user}) => {
     const router = useRouter();
 

@@ -49,18 +49,18 @@ const TweetPlaceholder: React.FC<TweetPlaceholderProps> = ({user}) => {
         <input value={postValue} onChange={(e)=>setPostValue(e.target.value)} className='mb-4 bg-transparent outline-none px-1 py-2 w-full text-[1.1em]' placeholder='What is happening?!'/>
         <div className="flex justify-between">
             <div className="flex">
-            <CldUploadWidget onUpload={onUpload} uploadPreset="h7trytjb">
-                {({open})=>{
-                    const onClick = () =>{
-                        open();
-                    }
-                    return (
-                      <ImageIcon size={40} onClick={onClick} className="text-lightBlue text-sm hover:bg-[#031019] cursor-pointer rounded-full p-2"/>
-                    )
-                }}
-            </CldUploadWidget>
-                <ScanFaceIcon size={40} className="text-darkBlue text-sm hover:bg-[#031019] cursor-pointer rounded-full p-2"/>
-                <LocateFixed size={40} className="text-darkBlue text-sm hover:bg-[#031019] cursor-pointer rounded-full p-2"/>
+              <CldUploadWidget onUpload={onUpload} uploadPreset="h7trytjb">
+                  {({open})=>{
+                      const onClick = () =>{
+                          open();
+                      }
+                      return (
+                        <ImageIcon size={40} onClick={onClick} className="text-lightBlue text-sm hover:bg-[#031019] cursor-pointer rounded-full p-2"/>
+                      )
+                  }}
+              </CldUploadWidget>
+                  <ScanFaceIcon size={40} className="text-darkBlue text-sm hover:bg-[#031019] cursor-pointer rounded-full p-2"/>
+                  <LocateFixed size={40} className="text-darkBlue text-sm hover:bg-[#031019] cursor-pointer rounded-full p-2"/>
             </div>
             <Button onClick={()=>createTweet({tweetDescription: postValue, uploadUrl: image, userId:user?.id!})} className={`rounded-xl py-1 px-3 ${(postValue.trim()==='' && image.trim()==='') || isLoading ? "bg-darkBlue text-gray-400 pointer-events-none":""}`}>{!isLoading ? "Tweet":"Tweeting..."}</Button>
         </div>
