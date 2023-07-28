@@ -27,6 +27,6 @@ model Tweet {
   user User @relation("TweetToUser",fields: [userId],references: [id])
   tweetDescription String
   uploadUrl String
-
+  likes String[]
   @@index([userId])
 }

@@ -1,8 +1,10 @@
-import { Tweet as TweetType } from "@prisma/client"
+import { Tweet as TweetType, User } from "@prisma/client"
 import Tweet from "./ui/tweet";
 
 interface TweetProps {
-    tweets: Array<TweetType>;
+    tweets: Array<TweetType & {
+      user: User
+  }>;
 }
 const Tweets:React.FC<TweetProps> = ({tweets}) => {
 

@@ -1,6 +1,5 @@
 "use client"
 import { MessageSquare, Share, Heart, BarChart } from "lucide-react"
-import Paragraph from "./ui/paragraph"
 import IconInteraction from "./ui/IconInteraction"
 
 const TweetInteractions = () => {
