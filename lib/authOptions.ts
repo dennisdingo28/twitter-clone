@@ -79,7 +79,6 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, account }) {
-      console.log(token);
       
       const existingUser = await prismadb.user.findUnique({where:{email: token.email || "" }});
       if(existingUser){

@@ -5,7 +5,6 @@ import Container from "@/components/ui/container";
 import { getAuthSession } from "@/lib/authOptions"
 export default async function Home() {
   const session = await getAuthSession();
-  console.log("ses",session);
   
   return (
    <main className="h-screen">

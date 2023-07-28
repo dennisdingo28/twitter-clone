@@ -1,6 +1,7 @@
+"use client"
+
 import { HTMLAttributes } from "react";
 import Paragraph from "./paragraph";
-import { cn } from "@/lib/utils/cn";
 
 interface IconInteractionProps extends HTMLAttributes<HTMLDivElement>{
     icon: React.ReactNode;

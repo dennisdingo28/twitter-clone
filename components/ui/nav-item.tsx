@@ -11,7 +11,6 @@ interface NavItemProps {
 
 const NavItem: FC<NavItemProps> = ({icon,label,link}) => {
   const path=usePathname();
-  console.log(path===link);
   
   return <div>
     <div className="relative group xl:flex items-center justify-center gap-3">

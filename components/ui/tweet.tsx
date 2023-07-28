@@ -3,6 +3,7 @@ import Paragraph from "./paragraph";
 import UserImage from "./user-image";
 import Image from "next/image";
 import TweetInteractions from "../TweetInteractions";
+import { getAuthSession } from "@/lib/authOptions";
 
 interface TweetProps {
     tweet: Tweet & {
@@ -10,7 +11,10 @@ interface TweetProps {
     };
 }
 
-const Tweet: React.FC<TweetProps> = ({tweet}) => {
+const Tweet: React.FC<TweetProps> = async ({tweet}) => {
+    const session = await getAuthSession();
+
+    
   return <div className="flex gap-2 border-b border-b-darkGray p-3">
         <UserImage imgUrl={tweet.user.imageUrl} className="w-[40px] h-[40px]"/>
         <div className="w-full">
@@ -26,7 +30,7 @@ const Tweet: React.FC<TweetProps> = ({tweet}) => {
                 </div> }
             </div>
             <div className="tweetInteractions mt-3">
-                <TweetInteractions/>
+                <TweetInteractions tweet={tweet} user={session?.user}/>
             </div>
         </div>
   </div>
