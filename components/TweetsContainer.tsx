@@ -9,7 +9,6 @@ const TweetsContainer: React.FC = async () => {
       user:true
     }
   });
-  console.log("tweets",tweets);
   
   return (
     <div>
