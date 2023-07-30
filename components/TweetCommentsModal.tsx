@@ -52,7 +52,8 @@ const TweetCommentsModal: React.FC<TweetCommentsModalProps> = ({
       onSuccess:()=>{
         toast.success("Reply was successfully added!");
       },
-      onError:()=>{
+      onError:(err)=>{
+        
         toast.error("Something went wrong while trying to reply to the tweet!");
       }
     })

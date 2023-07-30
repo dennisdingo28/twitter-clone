@@ -3,9 +3,9 @@ export default async function(tweetId: string,prevComments: any,commentValue: st
     const newComment = await axios.post('/api/tweet/comments',{
         tweetId,
         userId,
-        commentValue
+        comment:commentValue
     });
-
+    
     const res = await axios.patch(`/api/tweet/${tweetId}`,{
         comments:[
             newComment.data.newComment,

@@ -15,9 +15,9 @@ export async function PATCH(req: NextRequest, {params}:{params:{id: string}}){
             }
         });
 
-        return NextResponse.json({msg:"Tweet was successfully liked",ok:true},{status:200});
+        return NextResponse.json({msg:"Tweet was successfully updated",ok:true},{status:200});
     }catch(err){
-
+      
         return new NextResponse("Something went wrong. Please try again later!");
     }
 }
