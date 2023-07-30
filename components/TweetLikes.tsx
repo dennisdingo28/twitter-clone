@@ -5,14 +5,15 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useMutation } from "@tanstack/react-query"
 import likeTweet from "@/lib/likeTweet";
-import { Tweet, User as UserClient } from "@prisma/client"
+import { Tweet, User as UserClient, Comment } from "@prisma/client"
 import { User } from "next-auth"
 import { Heart } from "lucide-react";
 
 interface TweetLikeProps {
-    tweet: Tweet & {
-      user: UserClient;
-    };
+    tweet: (Tweet & {
+      user: UserClient | null;
+      comments: Comment[];
+    });
     user: User | undefined;
 }
 
@@ -23,9 +24,7 @@ const TweetLikes:React.FC<TweetLikeProps> = ({tweet,user}) => {
   const [tweetLikes,setTweetLikes] = useState<Array<string>>(tweet.likes);  
   const userLiked = tweetLikes.some((userId)=>userId===user?.id);
   
-  useEffect(()=>{
-    handleTweetLike();
-  },[tweetLikes]);
+
 
   const {mutate:handleTweetLike, isLoading} = useMutation({
     mutationFn:async ()=>{
@@ -40,6 +39,10 @@ const TweetLikes:React.FC<TweetLikeProps> = ({tweet,user}) => {
       setTweetLikes(filteredLikes);
     }
   });
+
+  useEffect(()=>{
+    handleTweetLike();
+  },[tweetLikes]);
 
   return (
     <>

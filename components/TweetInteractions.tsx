@@ -3,14 +3,15 @@ import { Share, BarChart } from "lucide-react"
 import IconInteraction from "./ui/IconInteraction"
 import { User } from "next-auth"
 import TweetLikes from "./TweetLikes";
-import { Tweet, User as UserClient } from "@prisma/client"
+import { Tweet, User as UserClient,Comment } from "@prisma/client"
 import TweetComments from "./TweetComments";
 
 
 interface TweetInteractionsProps {
-  tweet: Tweet & {
-    user: UserClient;
-  };
+  tweet: (Tweet & {
+    user: UserClient | null;
+    comments: Comment[];
+  });
   user: User | undefined;
 }
 

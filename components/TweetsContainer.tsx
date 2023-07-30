@@ -1,22 +1,29 @@
+import { Tweet, User, Comment } from "@prisma/client";
 import Tweets from "./Tweets";
 import prismadb from "@/lib/db";
 
 
+
 const TweetsContainer: React.FC = async () => {
-  const tweets = await prismadb.tweet.findMany({
-    include:{
-      user:true
+  const tweets:(Tweet & {
+    user: User | null;
+    comments: Comment[];
+  })[] = await prismadb.tweet.findMany({
+    include: {
+      user: true,
+      comments: true,
     },
-    orderBy:{
-      createdAt:"desc"
-    }
+    orderBy: {
+      createdAt: "desc",
+    },
   });
-   
+  console.log("tweets", tweets);
+
   return (
     <div>
-      <Tweets tweets={tweets}/>
+      <Tweets tweets={tweets} />
     </div>
-  )
-}
+  );
+};
 
 export default TweetsContainer;

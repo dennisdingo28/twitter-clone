@@ -3,3 +3,7 @@ export interface UserJwtPayload {
     email: string;
     imageUrl: string;
 }
+export interface Comment {
+    userId: string;
+    comment: string;
+}

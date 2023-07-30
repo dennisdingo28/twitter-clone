@@ -6,28 +6,41 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
-
 model User {
-  id String @id @default(uuid())
-  username String @unique
-  email String @unique
+  id       String  @id @default(uuid())
+  username String  @unique
+  email    String  @unique
   password String?
-  imageUrl String @default("/defaultProfile.png")
-  tweets Tweet[] @relation("TweetToUser")
+  imageUrl String  @default("/defaultProfile.png")
+  tweets   Tweet[]
+  comments Comment[]
 }
 
 model Tweet {
-  id String @id @default(uuid())
-  userId String
-  user User @relation("TweetToUser",fields: [userId],references: [id])
+  id               String    @id @default(uuid())
+  userId           String
+  user             User?     @relation(fields: [userId], references: [id])
   tweetDescription String
-  uploadUrl String
-  likes String[]
-  createdAt DateTime @default(now())
+  uploadUrl        String
+  likes            String[]
+  comments         Comment[]
+  createdAt        DateTime  @default(now())
+
+  @@index([userId])
+}
+
+model Comment {
+  id      String @id @default(uuid())
+  tweetId String
+  tweet   Tweet  @relation(fields: [tweetId], references: [id])
+  userId String
+  user User @relation(fields: [userId],references: [id])
+  comment String
+  @@index([tweetId])
   @@index([userId])
 }
