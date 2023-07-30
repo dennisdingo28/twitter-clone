@@ -4,6 +4,9 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import ToasterProivder from '@/providers/ToastProvider'
 import AuthProvider from '@/providers/AuthProvider'
+import Container from '@/components/ui/container'
+import PanelSide from '@/components/HomePage/PanelSide'
+import InfoPanel from '@/components/HomePage/InfoPanel'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,7 +27,25 @@ export default function RootLayout({
         <QueryProvider>
           <ToasterProivder/>
           <body className="bg-black text-white">
-            {children}
+          <Container>
+            <div className="flex h-screen">
+
+              <div className="min-w-[100px] ml-0 xs:ml-[5%] md:ml-[10%] max-w-[100%]">
+                <PanelSide/>
+              </div>
+
+              <div className="flex-1 flex h-screen overflow-y-scroll">
+                <div className="flex-1">
+                  {children}
+                </div>
+                <div className="hidden lg:flex flex-1 justify-center ">
+                    <InfoPanel/>
+                </div>
+              </div>
+          
+              
+            </div>
+        </Container>
           </body>
         </QueryProvider>
       </AuthProvider>

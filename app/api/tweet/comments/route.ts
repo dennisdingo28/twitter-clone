@@ -13,7 +13,8 @@ export async function POST(req: NextRequest){
             data:{
                 tweetId:payload.tweetId,
                 userId:payload.userId,
-                comment:payload.comment
+                comment:payload.comment,
+                uploadUrl:payload.uploadUrl,
             }
         });
 

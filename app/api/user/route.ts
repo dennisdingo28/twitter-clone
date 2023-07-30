@@ -3,6 +3,7 @@ import { SignUpValidator } from "@/validators";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 import bcrypt from "bcrypt";
+import { url } from "inspector";
 
 export async function POST(req: NextRequest){
     try{
@@ -43,5 +44,24 @@ export async function POST(req: NextRequest){
         if(err instanceof ZodError)
             return new NextResponse("Invalid payload format. Pleaset try again later.",{status:400});
         return new NextResponse("Something went wrong while trying to access your account.",{status:500});
+    }
+}
+
+export async function GET(req:NextRequest){
+    try{
+        const Url = new URL(req.url);
+        const username = Url.searchParams.get("username");
+        if(!username)
+            throw new Error("No queries were provided.");
+
+        const user = await prismadb.user.findFirst({
+            where:{
+                username
+            }
+        })
+        
+        return NextResponse.json({msg:"the user",user},{status:200});
+    }catch(err){
+
     }
 }

@@ -37,6 +37,10 @@ const TweetPlaceholder: React.FC<TweetPlaceholderProps> = ({user}) => {
     },
     onSuccess:(data)=>{
       toast.success("Tweet was successfully created!");  
+      setTimeout(()=>{
+        setPostValue("");
+        setImage("");
+      },1700);
       router.refresh();
     },
     onError:(err: any)=>{

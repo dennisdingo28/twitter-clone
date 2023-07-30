@@ -41,6 +41,7 @@ model Comment {
   userId String
   user User @relation(fields: [userId],references: [id])
   comment String
+  uploadUrl String?
   @@index([tweetId])
   @@index([userId])
 }

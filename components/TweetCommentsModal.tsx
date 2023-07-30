@@ -14,6 +14,7 @@ import Button from "./ui/button";
 import { useMutation } from "@tanstack/react-query";
 import commentTweet from "@/lib/commentTweet";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface TweetCommentsModalProps {
   open: boolean;
@@ -33,6 +34,8 @@ const TweetCommentsModal: React.FC<TweetCommentsModalProps> = ({
   user
 }) => {
   
+    const router = useRouter();
+
     const [tweetCommentsLength,setTweetCommentsLength] = useState(tweet.comments.length);
     const [commentValue,setCommentValue] = useState("");
     const [image,setImage] = useState("");
@@ -46,11 +49,16 @@ const TweetCommentsModal: React.FC<TweetCommentsModalProps> = ({
 
     const {mutate: handleTweetComment, isLoading} = useMutation({
       mutationFn: async ()=>{
-        await commentTweet(tweet.id,tweet.comments,commentValue,String(user?.id));
+        await commentTweet(tweet.id,tweet.comments,commentValue,String(user?.id),image);
         return null;
       },
       onSuccess:()=>{
         toast.success("Reply was successfully added!");
+        setTimeout(()=>{
+          setCommentValue("");
+          setImage("");
+        },1700);  
+        router.refresh();
       },
       onError:(err)=>{
         

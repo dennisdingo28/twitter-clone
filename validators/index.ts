@@ -46,6 +46,7 @@ export const CommentValidator = z.object({
   tweetId: z.string(),
   userId: z.string(),
   comment: z.string(),
+  uploadUrl: z.optional(z.string()),
 });
 
 export type CommentRequest = z.infer<typeof CommentValidator>;

@@ -4,6 +4,7 @@ import UserImage from "./user-image";
 import Image from "next/image";
 import TweetInteractions from "../TweetInteractions";
 import { getAuthSession } from "@/lib/authOptions";
+import Link from "next/link";
 
 interface TweetProps {
     tweet: (Tweet & {
@@ -16,7 +17,8 @@ const Tweet: React.FC<TweetProps> = async ({tweet}) => {
     const session = await getAuthSession();
 
     
-  return <div className="flex gap-2 border-b border-b-darkGray p-3 hover:bg-[#080808] cursor-pointer duration-150">
+  return <Link href={`/${tweet.user?.username}/${tweet.id}`}>
+    <div className="flex gap-2 border-b border-b-darkGray p-3 hover:bg-[#080808] cursor-pointer duration-150">
         <UserImage imgUrl={String(tweet.user?.imageUrl)} className="w-[40px] h-[40px]"/>
         <div className="w-full">
             <div className="flex gap-1 items-center">
@@ -35,6 +37,7 @@ const Tweet: React.FC<TweetProps> = async ({tweet}) => {
             </div>
         </div>
   </div>
+  </Link> 
 }
 
 export default Tweet

@@ -17,7 +17,6 @@ const TweetsContainer: React.FC = async () => {
       createdAt: "desc",
     },
   });
-  console.log("tweets", tweets);
 
   return (
     <div>
