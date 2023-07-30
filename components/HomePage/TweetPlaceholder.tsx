@@ -10,12 +10,15 @@ import { TweetRequest } from "@/validators";
 import axios from "axios";
 import { User } from "next-auth";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface TweetPlaceholderProps {
   user: User | undefined;
 }
 
 const TweetPlaceholder: React.FC<TweetPlaceholderProps> = ({user}) => {
+    const router = useRouter();
+
     const [postValue,setPostValue] = useState("");
     const [image,setImage] = useState("");
 
@@ -32,8 +35,9 @@ const TweetPlaceholder: React.FC<TweetPlaceholderProps> = ({user}) => {
       const newTweet = await axios.post('/api/tweet',data);
       return newTweet.data;
     },
-    onSuccess:(data)=>{      
-      toast.success(data.msg);
+    onSuccess:(data)=>{
+      toast.success("Tweet was successfully created!");  
+      router.refresh();
     },
     onError:(err: any)=>{
       if(err.response.data)
