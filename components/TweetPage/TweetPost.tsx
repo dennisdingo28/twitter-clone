@@ -44,7 +44,7 @@ const TweetPost:React.FC<TweetPostProps> = async ({accountName,tweetId}) => {
         <Tweet tweet={tweet}/>
         <div className="replySection flex flex-col">
             {tweet.comments.map(tweet=>(
-                <Link href={`/${tweet.user.username}`}>
+                <Link key={tweet.id} href={`/${tweet.user.username}`}>
                     <div className="flex gap-3 border-b border-darkGray p-3 hover:bg-[#080808] cursor-pointer duration-150">
                         <div className="">
                             <UserImage imgUrl={tweet.user.imageUrl} className="w-[43px] h-[40px]"/>

@@ -1,5 +1,7 @@
 import Header from '@/components/TweetPage/Header'
 import TweetPost from '@/components/TweetPage/TweetPost'
+import getAllUsers from '@/lib/getAllUsers'
+import { Tweet, User } from '@prisma/client'
 import React from 'react'
 
 type Params = {
@@ -8,6 +10,8 @@ type Params = {
     tweetId: string;
   }
 }
+
+export const revalidate = 60;
 
 const TweetPage:React.FC<Params> = ({params:{profileName,tweetId}}) => {
   const decodedProfileName = decodeURIComponent(profileName)
@@ -18,6 +22,22 @@ const TweetPage:React.FC<Params> = ({params:{profileName,tweetId}}) => {
         <TweetPost accountName={decodedProfileName} tweetId={tweetId}/>
     </div>
   )
+}
+
+export async function generateStaticParams(){
+    const allUsers = await getAllUsers();
+    
+
+    return allUsers.users.map((user: User & {tweets: Tweet[]})=>{
+      const encodedUsername = encodeURIComponent(user.username);
+      user.tweets.map(tweet=>{
+        return {
+          profileName:encodedUsername,
+          tweetId:tweet.id
+        }
+      })
+    })
+    
 }
 
 export default TweetPage
