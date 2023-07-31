@@ -18,11 +18,12 @@ const TweetPage:React.FC<Params> = ({params:{profileName,tweetId}}) => {
   
   return (
     <div className='border-r border-darkGray h-[100%]'>
-        <Header/>
+        <Header label={"Tweet"}/>
         <TweetPost accountName={decodedProfileName} tweetId={tweetId}/>
     </div>
   )
 }
+export default TweetPage
 
 export async function generateStaticParams(){
     const allUsers = await getAllUsers(); 
@@ -38,5 +39,3 @@ export async function generateStaticParams(){
     })
     
 }
-
-export default TweetPage
