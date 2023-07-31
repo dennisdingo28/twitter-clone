@@ -60,16 +60,12 @@ export async function GET(req:NextRequest){
             return NextResponse.json({msg:"the user",user,ok:true},{status:200});
 
         }else{
-            console.log('isr');
             
             const allUsers = await prismadb.user.findMany({
                 include:{
                     tweets:true,
                 }
-            });
-
-            console.log(allUsers);
-            
+            });            
 
             return NextResponse.json({msg:"All users",users:allUsers,ok:true},{status:200});
         }

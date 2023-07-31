@@ -25,8 +25,7 @@ const TweetPage:React.FC<Params> = ({params:{profileName,tweetId}}) => {
 }
 
 export async function generateStaticParams(){
-    const allUsers = await getAllUsers();
-    
+    const allUsers = await getAllUsers(); 
 
     return allUsers.users.map((user: User & {tweets: Tweet[]})=>{
       const encodedUsername = encodeURIComponent(user.username);
