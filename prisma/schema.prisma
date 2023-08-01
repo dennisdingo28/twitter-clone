@@ -14,6 +14,8 @@ model User {
   email    String    @unique
   password String?
   imageUrl String    @default("/defaultProfile.png")
+  headerProfileImage String @default("")
+  profileDescription String @default("")
   tweets   Tweet[]
   comments Comment[]
 }

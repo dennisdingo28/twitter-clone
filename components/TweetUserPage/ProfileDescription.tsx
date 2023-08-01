@@ -1,16 +1,21 @@
 import Paragraph from "../ui/paragraph"
 import {PiSuitcaseSimpleLight} from "react-icons/pi";
 import {CiLocationOn} from "react-icons/ci";
+import { User } from "@prisma/client";
 
-const ProfileDescription = () => {
+interface UserProfileDescriptionProps {
+    user: User;
+}
+
+const ProfileDescription:React.FC<UserProfileDescriptionProps> = ({user}) => {
   return (
     <div className="p-2 flex flex-col gap-3 border-b border-darkGray">
         <div className="">
-            <Paragraph className="font-bold text-[1.2em]">Moldovan Dennis</Paragraph>
-            <Paragraph className="text-[1em] text-gray-500">@MoldovanDennis</Paragraph>
+            <Paragraph className="font-bold text-[1.2em]">{user.username}</Paragraph>
+            <Paragraph className="text-[1em] text-gray-500">@{user.username.split(" ")[0]}{user.username.split(" ")[1]}</Paragraph>
         </div>
         <div className="">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur laborum rerum sapiente similique et quae. Ullam illum pariatur voluptas dolore rerum. Necessitatibus ea soluta quos.
+            {user.profileDescription}
         </div>
         <div className="flex gap-3">
             <div className="flex items-center gap-2">

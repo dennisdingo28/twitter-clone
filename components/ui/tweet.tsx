@@ -22,7 +22,7 @@ const Tweet: React.FC<TweetProps> = async ({tweet}) => {
                 <Link href={`/${tweet.user?.username}`}>
                     <div className="flex gap-1 items-center group">
                         <Paragraph className="font-bold text-[1em] group-hover:underline">{tweet.user?.username}</Paragraph>
-                        <Paragraph className="text-[#71767B]">@{tweet.user?.username.trim()}</Paragraph>
+                        <Paragraph className="text-[#71767B]">@{tweet.user?.username.split(" ")[0]}{tweet.user?.username.split(" ")[1]}</Paragraph>
                     </div>
                 </Link>
                 <Link href={`/${tweet.user?.username}/${tweet.id}`}>

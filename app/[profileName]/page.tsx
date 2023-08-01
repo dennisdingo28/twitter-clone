@@ -47,7 +47,7 @@ const TweetUserPage:React.FC<Params> = async ({params:{profileName}}) => {
           <Paragraph className='text-slate-500 text-sm'>{user.tweets.length <=1 ? `${user.tweets.length} tweet`:`${user.tweets.length} tweets`}</Paragraph>
         </div>
       </div>
-      <UserProfile/>
+      <UserProfile user={user}/>
       <div className="">
         {tweets.length > 0 ? (
           tweets.map((tweet)=>(

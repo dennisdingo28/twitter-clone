@@ -6,6 +6,7 @@ import TweetLikes from "./TweetLikes";
 import { Tweet, User as UserClient,Comment } from "@prisma/client"
 import TweetComments from "./TweetComments";
 import { toast } from "react-hot-toast";
+import { useOrigin } from "@/hooks/useOrigin";
 
 interface TweetInteractionsProps {
   tweet: (Tweet & {
@@ -17,6 +18,7 @@ interface TweetInteractionsProps {
 
 const TweetInteractions:React.FC<TweetInteractionsProps> = ({tweet,user}) => {
 
+  const origin = useOrigin();
 
   return (
     <div className="flex items-center justify-between">
@@ -24,7 +26,8 @@ const TweetInteractions:React.FC<TweetInteractionsProps> = ({tweet,user}) => {
         <TweetLikes tweet={tweet} user={user}/>
         <IconInteraction className="group-hover:text-lightBlue duration-150" handleClick={()=>{}} textData="7,632" icon={<BarChart size={40} className="text-[#9CA093] group-hover:text-lightBlue group-hover:bg-[#0C2839] rounded-full p-2 duration-150"/>}/>
         <Share onClick={async ()=>{
-          const clipboard = await navigator.clipboard.writeText("/afas")
+
+          const clipboard = await navigator.clipboard.writeText(`${origin}/${encodeURIComponent(String(tweet.user?.username))}/${tweet.id}`)
           toast.success("Successfully copied to clipboard!");
         }} size={40} className="text-[#9CA093] hover:text-lightBlue duration-150 p-2 hover:bg-[#0C2839] rounded-full"/>
     </div>
