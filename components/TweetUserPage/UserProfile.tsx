@@ -22,7 +22,7 @@ const UserProfile:React.FC<UserProfileProps> = async ({user}) => {
           )}
         </div>
         <div className="p-2 flex justify-between">  
-            <UserImage imgUrl="/defaultProfile.png" className="rounded-full -mt-20 w-[100px] h-[100px] xs:w-[115px] xs:h-[115px] sm:w-[130px] border-[3px] border-black sm:h-[130px]"/>
+            <UserImage imgUrl={user.imageUrl} className="rounded-full -mt-20 w-[100px] h-[100px] xs:w-[115px] xs:h-[115px] sm:w-[130px] border-[3px] border-black sm:h-[130px]"/>
           <div className="flex items-center gap-3">
             {session?.user?.name===user.username ? (
               <UserSettings user={user}/>

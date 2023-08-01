@@ -33,12 +33,11 @@ const ProfileDescription:React.FC<UserProfileDescriptionProps> = ({user}) => {
                 </div>  
             }
             {user.website.trim()!=='' &&
-                <div className="flex items-center gap-2">
-                    <Link href={user.website}>
+                <div >
+                    <Link href={user.website} className="flex items-center gap-2">
                         <PiBrowser className="text-gray-400 w-[20px] h-[20px]"/>
                         <span className="text-lightBlue">{user.website}</span>
                     </Link>
-                    
                 </div> 
             }
             

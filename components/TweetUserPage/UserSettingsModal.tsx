@@ -13,6 +13,7 @@ import {useForm} from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface UserSettingsModalProps {
     open: boolean;
@@ -22,12 +23,14 @@ interface UserSettingsModalProps {
 
 const UserSettingsModal: React.FC<UserSettingsModalProps> = ({open,handleClose,user}) => {
 
+    const router = useRouter();
+
     const {register, handleSubmit} = useForm({
         defaultValues:{
-            bio:"",
-            occupation:"",
-            location:"",
-            website:"",
+            bio:user.bio,
+            occupation:user.occupation,
+            location:user.location,
+            website:user.website,
         }
     })
 
@@ -44,14 +47,19 @@ const UserSettingsModal: React.FC<UserSettingsModalProps> = ({open,handleClose,u
 
     const {mutate:updateUser, isLoading} = useMutation({
         mutationFn: async(data: any)=>{
-            await axios.patch(`/api/user/${user.id}`,{...data})
+            await axios.patch(`/api/user/${user.id}`,{...data,imageUrl:profileImage,headerProfileImage})
         },
         onSuccess:()=>{
             toast.success("Updated")
+            setTimeout(()=>{
+                router.refresh();
+            },750)
         },
         onError:()=>{
             toast.error("Error")
-
+            setTimeout(()=>{
+                router.refresh();
+            },750)
         }
     })
 
@@ -64,10 +72,10 @@ const UserSettingsModal: React.FC<UserSettingsModalProps> = ({open,handleClose,u
 
            <div className="">
                 <div className="flex gap-3 items-center">
-                    <X size={60} className="cursor-pointer p-2 px-3 rounded-full hover:bg-[#181919]"/>
+                    <X onClick={handleClose} size={60} className="cursor-pointer p-2 px-3 rounded-full hover:bg-[#181919]"/>
                     <div className="flex items-center justify-between w-full">
                         <Paragraph className="text-[1.1em] font-bold">Edit Profile</Paragraph>
-                        <Button className="py-2 px-5 rounded-full bg-white text-black font-semibold hover:bg-[#D7DBDC] duration-150">Save</Button>
+                        <Button className={`py-2 px-5 rounded-full bg-white text-black font-semibold hover:bg-[#D7DBDC] duration-150 ${isLoading && "bg-[#D7DBDC] pointer-events-none"}`}>{!isLoading ? "Save":"Updating your profile..."}</Button>
                     </div>
                 </div>
             
