@@ -4,6 +4,7 @@ import Paragraph from '@/components/ui/paragraph'
 import { User } from '@prisma/client'
 import UserProfile from '@/components/TweetUserPage/UserProfile'
 import { ArrowLeft } from 'lucide-react'
+import Tweet from '@/components/ui/tweet'
 
 type Params = {
   params:{
@@ -19,14 +20,24 @@ const TweetUserPage:React.FC<Params> = async ({params:{profileName}}) => {
         username: decodedProfileName,
     },
     include:{
-      tweets:true
+      tweets:true,
     }
   });
   if(!user){
     return <Paragraph className="text-center text-[1.2em] font-bold mt-6">Cannot find any user with username {decodedProfileName}</Paragraph>
   }
 
+  const tweets = await prismadb.tweet.findMany({
+    where:{
+      userId:user.id,
+    },
+    include:{
+      user:true,
+      comments:true,
+    }
+  })
 
+  
   return (
     <div className='border-r border-darkGray h-full'>
       <div className="flex items-center py-2 gap-4">
@@ -37,6 +48,16 @@ const TweetUserPage:React.FC<Params> = async ({params:{profileName}}) => {
         </div>
       </div>
       <UserProfile/>
+      <div className="">
+        {tweets.length > 0 ? (
+          tweets.map((tweet)=>(
+          
+            <Tweet tweet={tweet}/>
+          ))
+        ):(
+          <Paragraph className='text-center my-3'>no current tweets</Paragraph>
+        )}
+      </div>
     </div>
   )
 }

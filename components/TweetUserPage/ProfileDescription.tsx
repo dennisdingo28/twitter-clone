@@ -4,7 +4,7 @@ import {CiLocationOn} from "react-icons/ci";
 
 const ProfileDescription = () => {
   return (
-    <div className="p-2 flex flex-col gap-3">
+    <div className="p-2 flex flex-col gap-3 border-b border-darkGray">
         <div className="">
             <Paragraph className="font-bold text-[1.2em]">Moldovan Dennis</Paragraph>
             <Paragraph className="text-[1em] text-gray-500">@MoldovanDennis</Paragraph>
