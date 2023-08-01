@@ -14,6 +14,7 @@ export async function PATCH(req: NextRequest,{params}:{params:{id: string}}){
                 ...newUserProps,
             }
         });
+        return NextResponse.json({msg:"Successfully updated",ok:true},{status:200});
     }catch(err){
         console.log(err);
         

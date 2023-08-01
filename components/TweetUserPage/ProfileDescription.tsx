@@ -2,6 +2,8 @@ import Paragraph from "../ui/paragraph"
 import {PiSuitcaseSimpleLight} from "react-icons/pi";
 import {CiLocationOn} from "react-icons/ci";
 import { User } from "@prisma/client";
+import { PiBrowser } from "react-icons/pi";
+import Link from "next/link";
 
 interface UserProfileDescriptionProps {
     user: User;
@@ -18,14 +20,28 @@ const ProfileDescription:React.FC<UserProfileDescriptionProps> = ({user}) => {
             {user.bio}
         </div>
         <div className="flex gap-3">
-            <div className="flex items-center gap-2">
-                <PiSuitcaseSimpleLight className="text-gray-400 w-[20px] h-[20px]"/>
-                <span className="text-gray-500">Media Personality</span>
-            </div>
-            <div className="flex items-center gap-2">
-                <CiLocationOn className="text-gray-400 w-[20px] h-[20px]"/>
-                <span className="text-gray-500">Dubai</span>
-            </div>
+            {user.occupation.trim()!=='' && 
+                <div className="flex items-center gap-2">
+                    <PiSuitcaseSimpleLight className="text-gray-400 w-[20px] h-[20px]"/>
+                    <span className="text-gray-500">{user.occupation}</span>
+                </div>
+            }
+            {user.location.trim()!=='' &&
+                <div className="flex items-center gap-2">
+                    <CiLocationOn className="text-gray-400 w-[20px] h-[20px]"/>
+                    <span className="text-gray-500">{user.location}</span>
+                </div>  
+            }
+            {user.website.trim()!=='' &&
+                <div className="flex items-center gap-2">
+                    <Link href={user.website}>
+                        <PiBrowser className="text-gray-400 w-[20px] h-[20px]"/>
+                        <span className="text-lightBlue">{user.website}</span>
+                    </Link>
+                    
+                </div> 
+            }
+            
         </div>
         <div className="">
             <div className="flex items-center gap-3">
