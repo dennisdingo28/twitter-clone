@@ -1,9 +1,9 @@
 import getAllUsers from '@/lib/getAllUsers'
-import Header from '@/components/TweetPage/Header'
 import prismadb from '@/lib/db'
 import Paragraph from '@/components/ui/paragraph'
 import { User } from '@prisma/client'
 import UserProfile from '@/components/TweetUserPage/UserProfile'
+import { ArrowLeft } from 'lucide-react'
 
 type Params = {
   params:{
@@ -29,8 +29,13 @@ const TweetUserPage:React.FC<Params> = async ({params:{profileName}}) => {
 
   return (
     <div className='border-r border-darkGray h-full'>
-      <Header label={decodedProfileName}/>
-      <Paragraph className='text-slate-500 text-sm px-5 -mt-2'>{user.tweets.length <=1 ? `${user.tweets.length} tweet`:`${user.tweets.length} tweets`}</Paragraph>
+      <div className="flex items-center py-2 gap-4">
+        <ArrowLeft className="p-2 hover:bg-[#191919] rounded-full duration-150 cursor-pointer" size={45}/>
+        <div className="flex flex-col items-start justify-center">
+          <Paragraph className='text-[1.1em] font-bold'>{decodedProfileName}</Paragraph>
+          <Paragraph className='text-slate-500 text-sm'>{user.tweets.length <=1 ? `${user.tweets.length} tweet`:`${user.tweets.length} tweets`}</Paragraph>
+        </div>
+      </div>
       <UserProfile/>
     </div>
   )
