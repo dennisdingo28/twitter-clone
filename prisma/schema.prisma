@@ -8,6 +8,8 @@ datasource db {
   relationMode = "prisma"
 }
 
+
+
 model User {
   id       String    @id @default(uuid())
   username String    @unique
@@ -15,7 +17,10 @@ model User {
   password String?
   imageUrl String    @default("/defaultProfile.png")
   headerProfileImage String @default("")
-  profileDescription String @default("")
+  bio String @default("")
+  occupation String @default("")
+  location String @default("")
+  website String @default("")
   tweets   Tweet[]
   comments Comment[]
 }
@@ -45,3 +50,4 @@ model Comment {
   @@index([tweetId])
   @@index([userId])
 }
+

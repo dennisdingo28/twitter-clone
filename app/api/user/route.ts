@@ -46,6 +46,7 @@ export async function POST(req: NextRequest){
     }
 }
 
+
 export async function GET(req:NextRequest){
     try{
         const Url = new URL(req.url);

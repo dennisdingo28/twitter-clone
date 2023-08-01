@@ -15,7 +15,7 @@ const ProfileDescription:React.FC<UserProfileDescriptionProps> = ({user}) => {
             <Paragraph className="text-[1em] text-gray-500">@{user.username.split(" ")[0]}{user.username.split(" ")[1]}</Paragraph>
         </div>
         <div className="">
-            {user.profileDescription}
+            {user.bio}
         </div>
         <div className="flex gap-3">
             <div className="flex items-center gap-2">
