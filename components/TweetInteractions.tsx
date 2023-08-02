@@ -24,7 +24,7 @@ const TweetInteractions:React.FC<TweetInteractionsProps> = ({tweet,user}) => {
     <div className="flex items-center justify-between">
         <TweetComments tweet={tweet} user={user}/>
         <TweetLikes tweet={tweet} user={user}/>
-        <IconInteraction className="group-hover:text-lightBlue duration-150" handleClick={()=>{}} textData="7,632" icon={<BarChart size={40} className="text-[#9CA093] group-hover:text-lightBlue group-hover:bg-[#0C2839] rounded-full p-2 duration-150"/>}/>
+        <IconInteraction className="group-hover:text-lightBlue duration-150" handleClick={()=>{}} textData={tweet.visits.length.toString()} icon={<BarChart size={40} className="text-[#9CA093] group-hover:text-lightBlue group-hover:bg-[#0C2839] rounded-full p-2 duration-150"/>}/>
         <Share onClick={async ()=>{
 
           const clipboard = await navigator.clipboard.writeText(`${origin}/${encodeURIComponent(String(tweet.user?.username))}/${tweet.id}`)

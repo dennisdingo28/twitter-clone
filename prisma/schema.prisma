@@ -47,6 +47,7 @@ model Tweet {
   createdAt        DateTime  @default(now())
   user             User?     @relation(fields: [userId], references: [id])
   comments         Comment[]
+  visits           String[]
 
   @@index([userId])
 }
