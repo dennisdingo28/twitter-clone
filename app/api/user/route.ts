@@ -51,6 +51,7 @@ export async function GET(req:NextRequest){
     try{
         const Url = new URL(req.url);
         const username = Url.searchParams.get("username");
+        const usernameIncluded = Url.searchParams.get("usernameIncluded");
 
         if(username){
             const user = await prismadb.user.findFirst({
@@ -58,9 +59,19 @@ export async function GET(req:NextRequest){
                     username
                 }
             });
-            return NextResponse.json({msg:"the user",user,ok:true},{status:200});
+            return NextResponse.json({msg:"User",user,ok:true},{status:200});
 
-        }else{
+        }else if(usernameIncluded){
+            const users = await prismadb.user.findMany({
+                where:{
+                    username:{
+                        contains:usernameIncluded || "",
+                    }
+                }
+            });
+            return NextResponse.json({msg:"the user",users,ok:true},{status:200});
+        }
+        else{
             
             const allUsers = await prismadb.user.findMany({
                 include:{
