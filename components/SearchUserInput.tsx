@@ -65,7 +65,7 @@ const SearchUserInput = () => {
   }, []);
 
   return (
-    <div className="relative" ref={containerRef}>
+    <div className="relative z-10" ref={containerRef}>
       <div className="flex items-center gap-2">
         <div className="flex flex-row-reverse gap-5 items-center focus-within:bg-black focus-within:border-lightBlue border border-[#202327] bg-[#202327] px-3 py-2 rounded-full">
           <input
