@@ -8,21 +8,34 @@ datasource db {
   relationMode = "prisma"
 }
 
-
-
 model User {
-  id       String    @id @default(uuid())
-  username String    @unique
-  email    String    @unique
-  password String?
-  imageUrl String    @default("/defaultProfile.png")
-  headerProfileImage String @default("")
-  bio String @default("")
-  occupation String @default("")
-  location String @default("")
-  website String @default("")
-  tweets   Tweet[]
-  comments Comment[]
+  id                 String      @id @default(uuid())
+  username           String      @unique
+  email              String      @unique
+  password           String?
+  imageUrl           String      @default("/defaultProfile.png")
+  headerProfileImage String      @default("")
+  bio                String      @default("")
+  occupation         String      @default("")
+  location           String      @default("")
+  website            String      @default("")
+  tweets             Tweet[]
+  comments           Comment[]
+  following          Following[] @relation("FollowerUser")
+  followers          Following[] @relation("FollowingUser")
+}
+
+model Following {
+  id String @id @default(uuid())
+
+  userId String
+  user   User   @relation("FollowerUser", fields: [userId], references: [id])
+
+  followingUserId String
+  followingUser   User   @relation("FollowingUser", fields: [followingUserId], references: [id])
+
+  @@index([userId])
+  @@index([followingUserId])
 }
 
 model Tweet {
@@ -50,4 +63,3 @@ model Comment {
   @@index([tweetId])
   @@index([userId])
 }
-

@@ -5,6 +5,7 @@ import { User } from '@prisma/client'
 import UserProfile from '@/components/TweetUserPage/UserProfile'
 import { ArrowLeft } from 'lucide-react'
 import Tweet from '@/components/ui/tweet'
+import Link from 'next/link'
 
 type Params = {
   params:{
@@ -17,10 +18,12 @@ const TweetUserPage:React.FC<Params> = async ({params:{profileName}}) => {
   const decodedProfileName = decodeURIComponent(profileName);
   const user = await prismadb.user.findFirst({
     where:{
-        username: decodedProfileName,
+      username: decodedProfileName,
     },
     include:{
       tweets:true,
+      following:true,
+      followers:true,
     }
   });
   if(!user){
@@ -41,7 +44,9 @@ const TweetUserPage:React.FC<Params> = async ({params:{profileName}}) => {
   return (
     <div className='border-r border-darkGray h-full'>
       <div className="flex items-center py-2 gap-4">
-        <ArrowLeft className="p-2 hover:bg-[#191919] rounded-full duration-150 cursor-pointer" size={45}/>
+        <Link href="/">
+          <ArrowLeft className="p-2 hover:bg-[#191919] rounded-full duration-150 cursor-pointer" size={45}/>
+        </Link>
         <div className="flex flex-col items-start justify-center">
           <Paragraph className='text-[1.1em] font-bold'>{decodedProfileName}</Paragraph>
           <Paragraph className='text-slate-500 text-sm'>{user.tweets.length <=1 ? `${user.tweets.length} tweet`:`${user.tweets.length} tweets`}</Paragraph>

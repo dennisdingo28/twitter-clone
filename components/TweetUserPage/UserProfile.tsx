@@ -1,13 +1,17 @@
 import Image from "next/image"
 import UserImage from "../ui/user-image"
-import Button from "../ui/button"
 import ProfileDescription from "./ProfileDescription"
-import { User } from "@prisma/client"
+import { Following, Tweet, User } from "@prisma/client"
 import UserSettings from "./UserSettings"
 import { getAuthSession } from "@/lib/authOptions"
+import FollowUser from "./FollowUser"
 
 interface UserProfileProps {
-  user: User;
+  user: User & {
+    tweets: Tweet[],
+    following: Following[],
+    followers: Following[],
+  };
 }
 
 const UserProfile:React.FC<UserProfileProps> = async ({user}) => {
@@ -27,9 +31,7 @@ const UserProfile:React.FC<UserProfileProps> = async ({user}) => {
             {session?.user?.name===user.username ? (
               <UserSettings user={user}/>
             ):(
-              <div className="">
-                <Button className="py-2 px-5 rounded-full bg-white text-black font-semibold hover:bg-[#D7DBDC] duration-150">Follow</Button>
-              </div>
+              <FollowUser sessionUser={session?.user} user={user}/>
             )}
             
           </div>

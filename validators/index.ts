@@ -50,3 +50,11 @@ export const CommentValidator = z.object({
 });
 
 export type CommentRequest = z.infer<typeof CommentValidator>;
+
+
+export const FollowValidator = z.object({
+  sessionUserId: z.string(),
+  userId: z.string(),
+});
+
+export type FollowRequest = z.infer<typeof FollowValidator>;
