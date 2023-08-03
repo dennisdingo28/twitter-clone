@@ -77,6 +77,14 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
+  debug: false,
+  session: {
+    strategy: 'jwt',
+  },
+  jwt: {
+      secret: process.env.NEXTAUTH_SECRET
+  },
   callbacks: {
     async jwt({ token, account }) {
       
@@ -95,13 +103,13 @@ export const authOptions: NextAuthOptions = {
         token.name=newUser?.username;
         token.picture=newUser?.imageUrl;
       }
-      const userJwt = generateJWT({
-        username: token.name!,
-        email: token.email!,
-        imageUrl: token.picture!,
-      });
+      // const userJwt = generateJWT({
+      //   username: token.name!,
+      //   email: token.email!,
+      //   imageUrl: token.picture!,
+      // });
     
-      token.access_token = userJwt;
+      // token.access_token = userJwt;
 
       return token;
     },

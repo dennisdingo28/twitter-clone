@@ -9,7 +9,7 @@ import { toast } from "react-hot-toast"
 import { useRouter } from "next/navigation"
 import { Loader2Icon } from "lucide-react"
 
-interface FollowUserProps {
+export interface FollowUserProps {
     sessionUser: SessionUser | undefined;
     user: User & {
         tweets: Tweet[],

@@ -14,6 +14,7 @@ type Params = {
   }
 }
 
+export const revalidate = 60;
 
 const TweetPage:React.FC<Params> = async ({params:{profileName,tweetId}}) => {
   const session = await getAuthSession();
@@ -64,6 +65,9 @@ export default TweetPage
 
 export async function generateStaticParams(){
     const allUsers = await getAllUsers(); 
+
+    if(!allUsers || allUsers.length===0)
+      return [];
 
     return allUsers.users.map((user: User & {tweets: Tweet[]})=>{
       const encodedUsername = encodeURIComponent(user.username);
