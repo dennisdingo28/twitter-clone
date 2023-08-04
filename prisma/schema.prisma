@@ -20,17 +20,24 @@ model User {
   location           String      @default("")
   website            String      @default("")
   tweets             Tweet[]
+  bookmarks          Bookmark[]     
   comments           Comment[]
   following          Following[] @relation("FollowerUser")
   followers          Following[] @relation("FollowingUser")
 }
 
+model Bookmark{
+  id String @id @default(uuid())
+  userId String
+  user User @relation(fields: [userId],references: [id])
+
+  @@index([userId])
+}
+
 model Following {
   id String @id @default(uuid())
-
   userId String
   user   User   @relation("FollowerUser", fields: [userId], references: [id])
-
   followingUserId String
   followingUser   User   @relation("FollowingUser", fields: [followingUserId], references: [id])
 
