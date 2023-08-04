@@ -19,12 +19,14 @@ const Tweet: React.FC<TweetProps> = async ({tweet}) => {
     return <div className="flex gap-2 border-b border-b-darkGray p-3 hover:bg-[#080808] cursor-pointer duration-150">
             <UserImage imgUrl={String(tweet.user?.imageUrl)} link={`/${encodeURIComponent(String(tweet.user?.username))}`} className="w-[40px] h-[40px]"/>
             <div className="w-full">
-                <Link className="flex" href={`/${encodeURIComponent(String(tweet.user?.username))}`}>
-                    <div className="flex gap-1 items-center group">
+                <div className="flex">
+                    <Link href={`/${encodeURIComponent(String(tweet.user?.username))}`} className="flex gap-1 items-center group">
                         <Paragraph className="font-bold text-[1em] group-hover:underline">{tweet.user?.username}</Paragraph>
                         <Paragraph className="text-[#71767B]">@{tweet.user?.username.split(" ")[0]}{tweet.user?.username.split(" ")[1]}</Paragraph>
+                    </Link>
+                    <div className="">
                     </div>
-                </Link>
+                </div>
                 <Link href={`/${encodeURIComponent(String(tweet.user?.username))}/${tweet.id}`}>
 
                     <div className="">
