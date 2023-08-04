@@ -5,7 +5,7 @@ import Paragraph from "../ui/paragraph"
 
 const InfoPanel = () => {
   return (
-    <div className="w-full h-[100vh] flex right-0 flex-col items-start justify-start text-white p-3">
+    <div className="w-full h-[100vh] flex flex-col items-start justify-start text-white p-3">
       <SearchUserInput/>
       <div className="h-full">
         <Paragraph className="my-3 text-start text-[1em] text-gray-300">Recommended Users</Paragraph>

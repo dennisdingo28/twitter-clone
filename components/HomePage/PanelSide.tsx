@@ -5,8 +5,11 @@ import NavItem from '../ui/nav-item'
 import { Home,Search, Bookmark, Users2Icon, User } from 'lucide-react'
 import UserControl from '../UserControl'
 import Button from '../ui/button'
+import { getAuthSession } from '@/lib/authOptions'
 
-const PanelSide = () => {
+const PanelSide = async () => {
+  const session = await getAuthSession();
+
   return (
     <div className='pb-5 border-r h-full border-darkGray flex-1'>
       <div className="flex h-[100%] flex-col items-center justify-between">
@@ -28,7 +31,7 @@ const PanelSide = () => {
               <NavItem icon={<Users2Icon size={30}/>} label='Communities' link="/communities"/>
             </div>
             <div className='cursor-pointer hover:bg-[rgba(255,255,255,.2)] rounded-full p-3 duration-200'>
-              <NavItem icon={<User size={30}/>} label='Profile' link="/profile"/>
+              <NavItem icon={<User size={30}/>} label='Profile' link={`${session?.user?.name}`}/>
             </div>
           </div>
           <Button className='w-full p-3 rounded-full mt-5 hidden sm:block'>Tweet</Button>

@@ -35,9 +35,9 @@ export default function RootLayout({
               <div className="flex-1 h-screen overflow-y-scroll">
                 {children}
               </div>
-              <div className="flex-1 flex h-screen overflow-y-hidden">
+              <div className="hidden lg:flex flex-1 h-screen overflow-y-hidden">
                 <div className="hidden lg:flex flex-1 justify-center ">
-                    <InfoPanel/>
+                  <InfoPanel/>
                 </div>
               </div>
             </div>

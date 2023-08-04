@@ -1,11 +1,9 @@
 import ContentTabs from "@/components/HomePage/ContentTabs"
 import Header from "@/components/HomePage/Header"
 import Tweets from "@/components/Tweets"
-import TweetsContainer from "@/components/TweetsContainer"
 import Paragraph from "@/components/ui/paragraph"
 import { getAuthSession } from "@/lib/authOptions"
 import prismadb from "@/lib/db"
-import { Comment, Tweet, User } from "@prisma/client"
 import Link from "next/link"
 import { Suspense } from "react"
 
@@ -16,8 +14,6 @@ const FollowingTweets = async () => {
             userId:session?.user?.id,
         }
     });
-    
-
 
     const followersTweets = userFollowingUsers.map(async(follower)=>{
         const userTweets = await prismadb.tweet.findMany({
