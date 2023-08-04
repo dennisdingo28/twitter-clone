@@ -19,20 +19,39 @@ model User {
   occupation         String      @default("")
   location           String      @default("")
   website            String      @default("")
-  tweets             Tweet[]
-  bookmarks          Bookmark[]     
+  tweets             Tweet[]     @relation("UserTweets")
+  bookmarks          Bookmark[]  @relation("BookmarkUser")
   comments           Comment[]
   following          Following[] @relation("FollowerUser")
   followers          Following[] @relation("FollowingUser")
 }
 
+model Tweet {
+  id               String    @id @default(uuid())
+  userId           String
+  tweetDescription String
+  uploadUrl        String
+  likes            String[]
+  createdAt        DateTime  @default(now())
+  user             User?     @relation("UserTweets", fields: [userId], references: [id])
+  bookmarks        Bookmark[] @relation("BookmarkTweet")
+  comments         Comment[]
+  visits           String[]
+  
+  @@index([userId])
+}
+
 model Bookmark{
   id String @id @default(uuid())
   userId String
-  user User @relation(fields: [userId],references: [id])
+  user User @relation("BookmarkUser",fields: [userId],references: [id])
+  tweetId String
+  tweet Tweet @relation("BookmarkTweet",fields: [tweetId],references: [id])
 
   @@index([userId])
+  @@index([tweetId])
 }
+
 
 model Following {
   id String @id @default(uuid())
@@ -45,19 +64,7 @@ model Following {
   @@index([followingUserId])
 }
 
-model Tweet {
-  id               String    @id @default(uuid())
-  userId           String
-  tweetDescription String
-  uploadUrl        String
-  likes            String[]
-  createdAt        DateTime  @default(now())
-  user             User?     @relation(fields: [userId], references: [id])
-  comments         Comment[]
-  visits           String[]
 
-  @@index([userId])
-}
 
 model Comment {
   id        String  @id @default(uuid())

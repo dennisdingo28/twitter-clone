@@ -5,7 +5,8 @@ import Image from "next/image";
 import TweetInteractions from "../TweetInteractions";
 import { getAuthSession } from "@/lib/authOptions";
 import Link from "next/link";
-import { BookDownIcon } from "lucide-react";
+import prismadb from "@/lib/db";
+import Bookmark from "../BookmarksPage/Bookmark";
 
 interface TweetProps {
     tweet: (Tweet & {
@@ -15,10 +16,20 @@ interface TweetProps {
 }
 
 
-
 const Tweet: React.FC<TweetProps> = async ({tweet}) => {
     const session = await getAuthSession();
+    const targetUser = await prismadb.user.findUnique({
+        where:{
+            id:session?.user?.id,
+        },
+        include:{
+            bookmarks:true,
+        }
+    });
 
+    const userAlreadyBookmarked = targetUser?.bookmarks.filter(bookmark=>bookmark.tweetId===tweet.id);
+    console.log(userAlreadyBookmarked);
+    
     return <div className="flex gap-2 border-b border-b-darkGray p-3 hover:bg-[#080808] cursor-pointer duration-150">
             <UserImage imgUrl={String(tweet.user?.imageUrl)} link={`/${encodeURIComponent(String(tweet.user?.username))}`} className="w-[40px] h-[40px]"/>
             <div className="w-full">
@@ -28,7 +39,7 @@ const Tweet: React.FC<TweetProps> = async ({tweet}) => {
                         <Paragraph className="text-[#71767B]">@{tweet.user?.username.split(" ")[0]}{tweet.user?.username.split(" ")[1]}</Paragraph>
                     </Link>
                     <div className="">
-                        <BookDownIcon size={40} className="text-gray-500 cursor-pointer p-2 rounded-full hover:bg-[rgba(255,255,255,.1)] duration-200"/>
+                        <Bookmark bookmarkId={userAlreadyBookmarked && userAlreadyBookmarked.length>0 ? userAlreadyBookmarked[0].id : ""} userId={session?.user?.id.toString()} tweetId={tweet.id} isBookmarked={userAlreadyBookmarked && userAlreadyBookmarked.length>0 ? true:false}/>
                     </div>
                 </div>
                 <Link href={`/${encodeURIComponent(String(tweet.user?.username))}/${tweet.id}`}>

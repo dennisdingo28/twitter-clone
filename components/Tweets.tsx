@@ -1,9 +1,11 @@
-import { Comment, Tweet as TweetType, User } from "@prisma/client";
+import { Bookmark, Comment, Tweet as TweetType, User } from "@prisma/client";
 import Tweet from "./ui/tweet";
 
 export interface TweetProps {
   tweets: (TweetType & {
-    user: User | null;
+    user: User & {
+      bookmarks: Bookmark[]
+    } | null;
     comments: Comment[];
   })[]
 }
