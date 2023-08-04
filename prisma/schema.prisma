@@ -24,6 +24,7 @@ model User {
   comments           Comment[]
   following          Following[] @relation("FollowerUser")
   followers          Following[] @relation("FollowingUser")
+  communities        Community[]
 }
 
 model Tweet {
@@ -77,4 +78,11 @@ model Comment {
 
   @@index([tweetId])
   @@index([userId])
+}
+
+model Community {
+  id String @id @default(uuid())
+  imageUrl String @default("/community.png")
+  name String
+  user User[]
 }
