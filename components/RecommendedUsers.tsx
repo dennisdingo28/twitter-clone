@@ -49,17 +49,18 @@ const RecommendedUsers = async () => {
 
 
 
-    return <div>
+    return <div className="">
         
         {data.map((user)=>{
 
             return (
                 <div className="flex items-center gap-5">
                     <UserProfile id={user.id} username={user.username} twitterUsername={user.username.split(" ")[0]+user.username.split(" ")[1]} userImage={user.imageUrl}/>
-                    <FollowUser sessionUser={session?.user} user={user}/> //@ts-ignore
+                    <FollowUser sessionUser={session?.user} user={user}/>
                 </div>
             )
         })}
+       
     </div>;
 };
 

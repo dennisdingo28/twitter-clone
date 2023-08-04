@@ -23,3 +23,27 @@ export async function POST(req: NextRequest){
         return new NextResponse("Something went wrong. Please try again later!",{status:500});
     }
 }
+
+export async function GET(req: NextRequest){
+    try {
+        const Url = new URL(req.url);
+
+        const userId = Url.searchParams.get("userId");
+
+        if(userId){
+            const userTweets = await prismadb.tweet.findMany({
+                where:{
+                    userId:userId,
+                },
+                include:{
+                    user:true,
+                    comments:true,
+                }
+            });
+
+            return NextResponse.json({msg:"Successfully retrieved all the user tweets.",tweets:userTweets,ok:true},{status:200});
+        }
+    } catch (err) {
+        return new NextResponse("Something went wrong. Please try again later!");
+    }
+}
