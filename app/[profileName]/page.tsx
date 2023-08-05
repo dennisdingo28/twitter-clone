@@ -14,6 +14,7 @@ type Params = {
 }
 
 
+
 const TweetUserPage:React.FC<Params> = async ({params:{profileName}}) => {
   const decodedProfileName = decodeURIComponent(profileName);
   const user = await prismadb.user.findFirst({

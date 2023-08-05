@@ -25,3 +25,13 @@ export async function POST(req: NextRequest){
         return new NextResponse("Something went wrong. Please try again later.",{status:500});
     }
 }
+
+export async function GET(req: NextRequest){
+    try{
+        const allCommunities = await prismadb.community.findMany();
+
+        return NextResponse.json({msg:"All communities were retrieved.",communities:allCommunities,ok:true},{status:200});
+    }catch(err){
+        return new NextResponse("Something went wrong. Please try again later.",{status:500});
+    }
+}

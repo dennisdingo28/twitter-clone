@@ -14,7 +14,6 @@ type Params = {
   }
 }
 
-export const revalidate = 60;
 
 const TweetPage:React.FC<Params> = async ({params:{profileName,tweetId}}) => {
   const session = await getAuthSession();

@@ -21,12 +21,14 @@ const FollowingTweets = async () => {
                 userId:follower.followingUserId,
             },
             include:{
-                user:true,
+                user:{
+                  include:{
+                    bookmarks:true,
+                  }
+                },
                 comments:true,
             }
         });
-        console.log("ut",userTweets);
-        
        return {
         ...userTweets,
        }
