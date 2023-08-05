@@ -26,7 +26,7 @@ const TweetPlaceholder: React.FC<TweetPlaceholderProps> = ({user}) => {
       console.log(result);
       
       setImage(result.info.secure_url)
-  }
+    }
 
 
 

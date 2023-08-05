@@ -68,3 +68,12 @@ export const BookmarkValidator = z.object({
 });
 
 export type BookmarkRequest = z.infer<typeof BookmarkValidator>;
+
+
+
+export const CommunityValidator = z.object({
+  communityName: z.string(),
+  communityImage: z.optional(z.string()),
+});
+
+export type CommunityRequest = z.infer<typeof CommunityValidator>;

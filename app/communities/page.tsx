@@ -1,16 +1,24 @@
 import Hero from "@/components/CommunitiesPage/Hero";
+import Community from "@/components/ui/community";
 import Paragraph from "@/components/ui/paragraph"
 import { getAuthSession } from "@/lib/authOptions";
+import prismadb from "@/lib/db";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 const Communities = async () => {
   const session = await getAuthSession();
-
+  const communities = await prismadb.community.findMany({
+    include:{
+      users:true,
+    }
+  });
+  console.log("coms",communities);
+  
   return (
     <div>
-         <div className="mb-5 p-3 ">
-          <div className="flex gap-4">
+         <div className="mb-5">
+          <div className="flex gap-4 p-3">
             <Link href="/">
                 <ArrowLeft className="p-2 hover:bg-[#191919] rounded-full duration-150 cursor-pointer" size={45}/>
               </Link>
@@ -20,6 +28,11 @@ const Communities = async () => {
               </div>
           </div>
             <Hero/>
+            <div className="flex flex-col mt-5">
+              {communities.map((community)=>(
+                <Community key={community.id} community={community}/>
+              ))}
+            </div>
         </div>
     </div>
   )
