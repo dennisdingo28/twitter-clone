@@ -5,7 +5,7 @@ import Button from '../ui/button'
 import CreateCommunityModal from './CreateCommunityModal'
 
 const Hero = () => {
-  const [isOpen,setIsOpen] = useState<boolean>(true);
+  const [isOpen,setIsOpen] = useState<boolean>(false);
   const [communityImage,setCommunityImage] = useState<string>("");
 
   const onUpload = (result: any) =>{

@@ -13,7 +13,6 @@ const Communities = async () => {
       users:true,
     }
   });
-  console.log("coms",communities);
   
   return (
     <div>
@@ -30,7 +29,9 @@ const Communities = async () => {
             <Hero/>
             <div className="flex flex-col mt-5">
               {communities.map((community)=>(
-                <Community key={community.id} community={community}/>
+                <Link href={`/communities/${community.id}`}>
+                  <Community key={community.id} community={community}/>
+                </Link>
               ))}
             </div>
         </div>
