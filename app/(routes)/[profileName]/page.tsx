@@ -73,7 +73,7 @@ export default TweetUserPage
 export async function generateStaticParams(){
   const allUsers = await getAllUsers();
 
-  if(!allUsers || allUsers.length===0)
+  if(allUsers || allUsers.users.length===0)
     return [];
 
   return allUsers.users.map((user: User)=>{

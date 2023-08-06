@@ -65,11 +65,13 @@ export default TweetPage
 export async function generateStaticParams(){
     const allUsers = await getAllUsers(); 
 
-    if(!allUsers || allUsers.length===0)
+    if(!allUsers || allUsers.users.length===0)
       return [];
 
     return allUsers.users.map((user: User & {tweets: Tweet[]})=>{
       const encodedUsername = encodeURIComponent(user.username);
+      if(user.tweets.length===0)
+        return [];
       user.tweets.map(tweet=>{
         return {
           profileName:encodedUsername,
@@ -77,5 +79,4 @@ export async function generateStaticParams(){
         }
       })
     })
-    
 }

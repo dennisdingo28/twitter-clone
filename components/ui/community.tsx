@@ -1,10 +1,10 @@
-import { Community, User } from "@prisma/client"
+import { Community, User, UserCommunity } from "@prisma/client"
 import Image from "next/image";
 import Paragraph from "./paragraph";
 
 interface CommunityProps {
     community: Community & {
-        users: User[],
+        users: UserCommunity[],
     };
 };
 

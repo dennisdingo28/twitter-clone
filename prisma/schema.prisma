@@ -24,8 +24,27 @@ model User {
   comments           Comment[]
   following          Following[] @relation("FollowerUser")
   followers          Following[] @relation("FollowingUser")
-  communities        Community[]
+  communities        UserCommunity[] @relation("UserCommunities")
 }
+
+model UserCommunity{
+  id String @id @default(uuid())
+  userId String
+  user User @relation("UserCommunities",fields: [userId],references: [id])
+  communityId String
+  community Community @relation("UserCommunities",fields: [communityId],references: [id])
+  @@index([userId])
+  @@index([communityId])
+}
+
+model Community {
+  id String @id @default(uuid())
+  imageUrl String @default("/community.png")
+  name String
+  users UserCommunity[] @relation("UserCommunities")
+}
+
+
 
 model Tweet {
   id               String    @id @default(uuid())
@@ -75,11 +94,4 @@ model Comment {
 
   @@index([tweetId])
   @@index([userId])
-}
-
-model Community {
-  id String @id @default(uuid())
-  imageUrl String @default("/community.png")
-  name String
-  users User[]
 }
