@@ -21,7 +21,7 @@ const Popover: React.FC<PopoverProps> = ({label}) => {
         </div>
         <div className="hover:bg-[rgba(255,255,255,0.1)]">
             <div className="p-3 w-full">
-                <SignOut className="bg-transparent border-none hover:bg-transparent text-start w-full"><Paragraph className="font-bold text-sm">Log out <br/> @{label}</Paragraph></SignOut>
+                <SignOut className="bg-transparent border-none hover:bg-transparent text-start w-full">Log out  @{label}</SignOut>
             </div>
         </div>
     </div>

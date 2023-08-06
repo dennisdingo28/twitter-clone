@@ -15,7 +15,7 @@ const LoginModal: React.FC = () => {
     <Modal isOpen={open} setOpen={setOpen} onClose={onClose} modalTitle='Connect to Twitter' modalDescription="or">
         <LoginForm/>
        
-        <small className="text-start whitespace-nowrap">Not have an account? <Link href={"/register"} className="underline text-lightBlue">Create account</Link></small>
+        <small className="text-white text-start whitespace-nowrap">Not have an account? <Link href={"/register"} className="underline text-lightBlue">Create account</Link></small>
     </Modal>
   )
 }

@@ -24,7 +24,7 @@ export default function RootLayout({
       <AuthProvider>
         <QueryProvider>
           <ToasterProivder/>
-          <body className="bg-black text-white"><Container>{children}</Container></body>
+          <body>{children}</body>
         </QueryProvider>
       </AuthProvider>
     </html>

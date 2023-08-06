@@ -14,7 +14,7 @@ const RegisterModal: React.FC = () => {
   return (
     <Modal isOpen={open} onClose={onClose} setOpen={setOpen} modalTitle='Connect to Twitter' modalDescription="or">
         <RegisterForm/>
-        <small className="text-start whitespace-nowrap">Already have an account? <Link href={"/login"} className="underline text-lightBlue">Sign in</Link></small>
+        <small className="text-white text-start whitespace-nowrap">Already have an account? <Link href={"/login"} className="underline text-lightBlue">Sign in</Link></small>
     </Modal>
   )
 }
