@@ -18,21 +18,18 @@ interface JoinCommunityProps {
 
 const JoinCommunity: React.FC<JoinCommunityProps> = ({id,userId,user,users}) => {
     const router = useRouter();
-    const [currentUsers,setCurrentUsers] = useState(users);
     
-    const userAlreadyJoined = currentUsers.some(currentUser=>currentUser.userId===user.id);
+    const userAlreadyJoined = users.some(currentUser=>currentUser.userId===user.id);
     const [alreadyJoined,setAlreadyJoined] = useState(userAlreadyJoined);
     
     const {mutate: joinCommunity,isLoading} = useMutation({
         mutationFn: async()=>{
             if(!alreadyJoined){
-                // setCurrentUsers([user,...currentUsers]);
                 await axios.post(`/api/community/${id}/join`,{
                     userId:userId,
                 });
                 setAlreadyJoined(true);
             }else{
-                //leave
                 await axios.post(`/api/community/${id}/leave`,{
                     userId:userId,
                 });

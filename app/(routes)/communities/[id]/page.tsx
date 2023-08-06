@@ -1,4 +1,6 @@
+import CommunityPosts from "@/components/CommunitiesPage/CommunityPosts";
 import JoinCommunity from "@/components/CommunitiesPage/JoinCommunity";
+import TweetPlaceholder from "@/components/HomePage/TweetPlaceholder";
 import Paragraph from "@/components/ui/paragraph";
 import { getAuthSession } from "@/lib/authOptions";
 import prismadb from "@/lib/db";
@@ -50,14 +52,19 @@ const CommunityPage:React.FC<Params> = async ({params:{id}}) => {
         <Image src={communityImage} width={160} height={160} className="max-w-[150px] max-h-[150px] object-cover" quality={100} alt="community image"/>
         <Paragraph className="font-bold text-[1.04em]">{community?.name}</Paragraph>
       </div>
-      <div className="p-3 flex items-center justify-between">
+      <div className="p-3 flex flex-col justify-center items-center gap-2 sm:gap-0 sm:flex-row xs:justify-between">
         <Paragraph className="text-sm font-bold text-white flex items-center gap-2">{community?.users.length}
         <span className="font-normal text-gray-500">{membersMessage}</span></Paragraph>
         <div className="">
           <JoinCommunity id={community?.id!} user={user!} users={community?.users || []} userId={session?.user?.id!}/>
         </div>
       </div>
-      
+      <div className="my-6 p-3">
+        <TweetPlaceholder communityId={community?.id.toString()} user={session?.user}/>
+      </div>
+      <div>
+        <CommunityPosts community={community!}/>
+      </div>
     </div>
   )
 }

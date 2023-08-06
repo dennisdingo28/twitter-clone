@@ -33,6 +33,7 @@ model UserCommunity{
   user User @relation("UserCommunities",fields: [userId],references: [id])
   communityId String
   community Community @relation("UserCommunities",fields: [communityId],references: [id])
+
   @@index([userId])
   @@index([communityId])
 }
@@ -42,6 +43,7 @@ model Community {
   imageUrl String @default("/community.png")
   name String
   users UserCommunity[] @relation("UserCommunities")
+  communityTweets Tweet[]
 }
 
 model Tweet {
@@ -55,8 +57,11 @@ model Tweet {
   bookmarks        Bookmark[] @relation("BookmarkTweet")
   comments         Comment[]
   visits           String[]
+  communityId      String?
+  community        Community? @relation(fields: [communityId],references: [id]) 
   
   @@index([userId])
+  @@index([communityId])
 }
 
 model Bookmark{

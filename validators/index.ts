@@ -24,6 +24,7 @@ export const TweetValidator = z.object({
     tweetDescription: z.optional(z.string()),
     uploadUrl: z.optional(z.string()),
     userId: z.string(),
+    communityId: z.optional(z.string()),
 
   }).refine((data) => {
     if (!data.tweetDescription && !data.uploadUrl) {

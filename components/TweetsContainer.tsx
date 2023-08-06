@@ -11,6 +11,9 @@ const TweetsContainer: React.FC = async () => {
      } | null;
     comments: Comment[];
   })[] = await prismadb.tweet.findMany({
+    where:{
+      communityId:null,
+    },
     include: {
       user: {
         include:{

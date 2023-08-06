@@ -14,9 +14,10 @@ import { useRouter } from "next/navigation";
 
 interface TweetPlaceholderProps {
   user: User | undefined;
+  communityId?: string;
 }
 
-const TweetPlaceholder: React.FC<TweetPlaceholderProps> = ({user}) => {
+const TweetPlaceholder: React.FC<TweetPlaceholderProps> = ({user,communityId}) => {
     const router = useRouter();
 
     const [postValue,setPostValue] = useState("");
@@ -32,7 +33,12 @@ const TweetPlaceholder: React.FC<TweetPlaceholderProps> = ({user}) => {
 
   const {mutate: createTweet, isLoading} = useMutation({
     mutationFn: async (data: TweetRequest) => {
-      const newTweet = await axios.post('/api/tweet',data);
+      let requestData = data;
+      
+      if(communityId && communityId.trim()!=="")
+        requestData={...data,communityId:communityId};
+
+      const newTweet = await axios.post('/api/tweet',requestData);
       return newTweet.data;
     },
     onSuccess:(data)=>{
