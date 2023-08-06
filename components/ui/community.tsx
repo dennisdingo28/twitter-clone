@@ -1,6 +1,8 @@
+
 import { Community, User, UserCommunity } from "@prisma/client"
 import Image from "next/image";
 import Paragraph from "./paragraph";
+import UserImage from "./user-image";
 
 interface CommunityProps {
     community: Community & {
@@ -28,6 +30,13 @@ const Community: React.FC<CommunityProps> = ({community}) => {
                 {community.users.length}
                 <span className="font-normal text-[.9em] text-gray-500">{membersMessage}</span>
             </Paragraph>
+        </div>
+        <div className="">
+            {community.users.map((user)=>(
+                <div className="">
+                    
+                </div>
+            ))}
         </div>
     </div>
   )

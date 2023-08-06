@@ -27,13 +27,13 @@ export async function POST(req: NextRequest,{params}:{params:{id: string}}){
             return new NextResponse("User was not found. Please try again later.",{status:400});
         }
 
-        await prismadb.userCommunity.create({
-            data:{
+        await prismadb.userCommunity.deleteMany({
+            where:{
                 userId:payload.userId,
-                communityId:communityId,
-            },
+                communityId:params.id,
+            }
         })
-        return NextResponse.json({msg:"Successfully joined the community.",ok:true,},{status:200});
+        return NextResponse.json({msg:"Successfully left the community.",ok:true,},{status:200});
     }catch(err){
         return new NextResponse("Something went wrong. Please try again later!",{status:500});
     }

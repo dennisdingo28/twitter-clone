@@ -6,6 +6,8 @@ import { toast } from "react-hot-toast"
 import axios from "axios"
 import { User, UserCommunity } from "@prisma/client"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { Loader2 } from "lucide-react"
 
 interface JoinCommunityProps {
     id: string;
@@ -15,31 +17,56 @@ interface JoinCommunityProps {
 }
 
 const JoinCommunity: React.FC<JoinCommunityProps> = ({id,userId,user,users}) => {
+    const router = useRouter();
     const [currentUsers,setCurrentUsers] = useState(users);
-    const userAlreadyJoined = currentUsers.some(user=>user.id===userId);
-
+    
+    const userAlreadyJoined = currentUsers.some(currentUser=>currentUser.userId===user.id);
+    const [alreadyJoined,setAlreadyJoined] = useState(userAlreadyJoined);
+    
     const {mutate: joinCommunity,isLoading} = useMutation({
         mutationFn: async()=>{
-            if(!userAlreadyJoined){
+            if(!alreadyJoined){
                 // setCurrentUsers([user,...currentUsers]);
-                await axios.patch(`/api/community/${id}`,{
-                    users:[user,...currentUsers]
+                await axios.post(`/api/community/${id}/join`,{
+                    userId:userId,
                 });
+                setAlreadyJoined(true);
             }else{
                 //leave
+                await axios.post(`/api/community/${id}/leave`,{
+                    userId:userId,
+                });
+                setAlreadyJoined(false);
             }
-            
         },
         onSuccess:()=>{
-            toast.success("Successfully joined the community.");
+            if(!alreadyJoined){
+                toast.success("Successfully joined the community.");
+            }
+            else{
+                toast.success("Successfully left the community.");
+            }
+            router.refresh();
         },
         onError:()=>{
             toast.error("Something went wrong. Please try again later!");
+            setAlreadyJoined(userAlreadyJoined);
+
         }
     })
     return (
     <div className="">
-        <Button onClick={()=>joinCommunity()} className="rounded-full py-1 px-4">Join</Button>
+        {!alreadyJoined ? (
+            <div className="flex items-center gap-2">
+                <Button onClick={()=>joinCommunity()} className={`rounded-full py-1 px-4 ${isLoading && "bg-darkBlue pointer-events-none"}`}>{isLoading ? "Joining...":"Join"}</Button>
+                {isLoading && <Loader2 size={17} className="animate-spin"/>}
+            </div>
+        ):(
+            <div className="flex items-center gap-2">
+                <Button onClick={()=>joinCommunity()} className={`rounded-full py-1 px-4 ${isLoading && "bg-darkBlue pointer-events-none"}`}>{isLoading ? "Leaving community...":"Leave community"}</Button>
+                {isLoading && <Loader2 size={17} className="animate-spin"/>}
+            </div>
+        )}
     </div>
   )
 }

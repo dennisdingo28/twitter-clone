@@ -39,6 +39,7 @@ const CommunityPage:React.FC<Params> = async ({params:{id}}) => {
       id: session?.user?.id,
     }
   });
+  
 
   return (
     <div>

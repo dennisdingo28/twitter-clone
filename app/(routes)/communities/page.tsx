@@ -10,7 +10,11 @@ const Communities = async () => {
   const session = await getAuthSession();
   const communities = await prismadb.community.findMany({
     include:{
-      users:true,
+      users:{
+        include:{
+          user:true,
+        }
+      },
     }
   });
   
@@ -29,7 +33,7 @@ const Communities = async () => {
             <Hero/>
             <div className="flex flex-col mt-5">
               {communities.map((community)=>(
-                <Link href={`/communities/${community.id}`}>
+                <Link key={community.id} href={`/communities/${community.id}`}>
                   <Community key={community.id} community={community}/>
                 </Link>
               ))}

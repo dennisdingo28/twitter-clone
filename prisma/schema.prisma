@@ -44,8 +44,6 @@ model Community {
   users UserCommunity[] @relation("UserCommunities")
 }
 
-
-
 model Tweet {
   id               String    @id @default(uuid())
   userId           String
