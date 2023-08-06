@@ -33,6 +33,13 @@ const CommunityPage:React.FC<Params> = async ({params:{id}}) => {
         membersMessage="members"
     }
   const communityImage: string | StaticImport = community?.imageUrl!;
+
+  const user = await prismadb.user.findUnique({
+    where:{
+      id: session?.user?.id,
+    }
+  });
+
   return (
     <div>
       <div className="p-3">
@@ -46,7 +53,7 @@ const CommunityPage:React.FC<Params> = async ({params:{id}}) => {
         <Paragraph className="text-sm font-bold text-white flex items-center gap-2">{community?.users.length}
         <span className="font-normal text-gray-500">{membersMessage}</span></Paragraph>
         <div className="">
-          <JoinCommunity id={community?.id!} users={community?.users} userId={session?.user?.id!}/>
+          <JoinCommunity id={community?.id!} user={user!} users={community?.users || []} userId={session?.user?.id!}/>
         </div>
       </div>
       

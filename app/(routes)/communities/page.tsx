@@ -13,6 +13,7 @@ const Communities = async () => {
       users:true,
     }
   });
+  console.log("communities",communities);
   
   return (
     <div>

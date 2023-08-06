@@ -6,10 +6,11 @@ import { Home,Search, Bookmark, Users2Icon, User } from 'lucide-react'
 import UserControl from '../UserControl'
 import Button from '../ui/button'
 import { getAuthSession } from '@/lib/authOptions'
+import { notFound } from 'next/navigation'
 
 const PanelSide = async () => {
   const session = await getAuthSession();
-
+  
   return (
     <div className='pb-5 border-r h-full border-darkGray flex-1'>
       <div className="flex h-[100%] flex-col items-center justify-between">
