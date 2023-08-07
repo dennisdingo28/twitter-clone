@@ -2,11 +2,9 @@ import React from 'react'
 import Logo from '../ui/logo'
 import Link from 'next/link'
 import NavItem from '../ui/nav-item'
-import { Home,Search, Bookmark, Users2Icon, User } from 'lucide-react'
+import { Home, Bookmark, Users2Icon, User } from 'lucide-react'
 import UserControl from '../UserControl'
-import Button from '../ui/button'
 import { getAuthSession } from '@/lib/authOptions'
-import { TwitterIcon } from 'lucide-react'
 import SideTweet from './SideTweet'
 
 const PanelSide = async () => {

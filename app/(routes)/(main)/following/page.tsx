@@ -1,12 +1,10 @@
 import ContentTabs from "@/components/HomePage/ContentTabs"
 import Header from "@/components/HomePage/Header"
 import Tweets from "@/components/Tweets"
-import Loading from "@/components/ui/Loading"
 import Paragraph from "@/components/ui/paragraph"
 import { getAuthSession } from "@/lib/authOptions"
 import prismadb from "@/lib/db"
 import Link from "next/link"
-import { Suspense } from "react"
 
 const FollowingTweets = async () => {
     const session = await getAuthSession();

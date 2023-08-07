@@ -37,12 +37,13 @@ const TweetPlaceholder: React.FC<TweetPlaceholderProps> = ({user,communityId}) =
       
       if(communityId && communityId.trim()!=="")
         requestData={...data,communityId:communityId};
-
       const newTweet = await axios.post('/api/tweet',requestData);
       return newTweet.data;
     },
     onSuccess:(data)=>{
-      toast.success("Tweet was successfully created!");  
+      toast.success("Tweet was successfully created!",{
+        
+      });  
       setTimeout(()=>{
         setPostValue("");
         setImage("");

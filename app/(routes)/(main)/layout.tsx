@@ -32,7 +32,7 @@ export default async function RootLayout({
             <body className="bg-black text-white">
               <Container>
                 <div className="flex h-screen">
-                  <div className="min-w-[100px] ml-0 xs:ml-[5%] md:ml-[10%] max-w-[100%]">
+                  <div className="min-w-[100px] ml-0 md:ml-[10%] max-w-[100%]">
                     <PanelSide/>
                   </div>
                   <div className="flex-1 h-screen overflow-y-scroll contentScroll">

@@ -12,7 +12,16 @@ const ToasterProivder = () =>{
     if(!mounted)
         return null;
     return (
-        <Toaster/>
+        <Toaster toastOptions={{
+            style:{
+                background:"#1e1e1e",
+                color:"white",
+              },
+              iconTheme: {
+                primary: '#000',
+                secondary: '#1b9aef',
+              },
+        }}/>
     )
 }
 
