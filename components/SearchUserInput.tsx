@@ -87,7 +87,7 @@ const SearchUserInput = () => {
       </div>
       <SearchUserResults
         data={data}
-        className={`absolute left-0 -bottom-[2.9rem] w-full rounded-md bg-black shadow-[0px_0px_5px_rgba(255,255,255,.5)] ${(data && data.length > 0) ? "h-[220px] -bottom-[11.3rem] overflow-y-scroll" : ""
+        className={`absolute left-0 -bottom-[2.9rem] w-full rounded-md bg-black shadow-[0px_0px_5px_rgba(255,255,255,.5)] ${(data && data.length > 0) ? "h-[220px] -bottom-[14.05rem] overflow-y-scroll contentScroll" : ""
           } ${!show ? "opacity-0 -z-10" : "opacity-100 z-0"
           } duration-200`}
       />

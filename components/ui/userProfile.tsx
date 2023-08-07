@@ -11,7 +11,7 @@ interface UserProfileProps {
 
 const UserProfile: React.FC<UserProfileProps> = ({id,userImage,username,twitterUsername}) => {
   return (
-    <Link href={`/${encodeURIComponent(username)}`} key={id} className="flex items-center gap-2 p-4 hover:bg-[#16181c] cursor-pointer duration-150">
+    <Link href={`/${encodeURIComponent(username)}`} key={id} className="flex items-center gap-2 p-4">
             <UserImage imgUrl={userImage}/>
             <div className="">
                 <Paragraph className="font-bold">{username}</Paragraph>

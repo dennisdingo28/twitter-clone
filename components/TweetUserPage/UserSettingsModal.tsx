@@ -34,9 +34,8 @@ const UserSettingsModal: React.FC<UserSettingsModalProps> = ({open,handleClose,u
         }
     })
 
-
     const [profileImage,setProfileImage] = useState<string>(user.imageUrl);
-    const [headerProfileImage,setHeaderProfileImage] = useState<string>("");
+    const [headerProfileImage,setHeaderProfileImage] = useState<string>(user.headerProfileImage);
 
     const onUploadProfileImage = (result: any)=>{
         setProfileImage(result.info.secure_url);

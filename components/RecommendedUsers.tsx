@@ -54,7 +54,7 @@ const RecommendedUsers = async () => {
         {data.map((user)=>{
 
             return (
-                <div className="flex items-center gap-5">
+                <div className="flex items-center gap-5 hover:bg-[#16181c] cursor-pointer duration-150 rounded-md pr-2">
                     <UserProfile id={user.id} username={user.username} twitterUsername={user.username.split(" ")[0]+user.username.split(" ")[1]} userImage={user.imageUrl}/>
                     <FollowUser sessionUser={session?.user} user={user}/>
                 </div>

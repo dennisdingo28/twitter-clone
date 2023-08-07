@@ -18,9 +18,9 @@ const UserProfile:React.FC<UserProfileProps> = async ({user}) => {
   const session = await getAuthSession();
   return (
     <div className="">
-        <div className="">
+        <div className="max-w-[570px] w-full min-h-[120px] max-h-[270px]">
           {user.headerProfileImage.trim()!=="" ? (
-            <Image src={"/twitterHeaderImage.jpg"} width={200} height={200} className="w-full min-h-[120px] h-full object-cover" alt="header profile"/>
+            <Image src={user.headerProfileImage} priority width={548} height={200} className="min-h-[200px] max-h-[270px] w-full h-full object-cover" quality={100} alt="header profile"/>
           ):(
             <div className="w-full min-h-[200px] max-h-[230px] h-full bg-[#333639]"></div>
           )}

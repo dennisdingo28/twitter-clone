@@ -43,7 +43,7 @@ const JoinCommunity: React.FC<JoinCommunityProps> = ({id,userId,user,users}) => 
             else{
                 toast.success("Successfully left the community.");
             }
-            router.refresh();
+            window.location.reload();
         },
         onError:()=>{
             toast.error("Something went wrong. Please try again later!");

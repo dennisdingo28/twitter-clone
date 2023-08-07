@@ -42,6 +42,8 @@ const CommunityPage:React.FC<Params> = async ({params:{id}}) => {
     }
   });
   
+  const userAlreadyJoined = community?.users.some(communityUser=>communityUser.userId===user?.id) || false;  
+  
 
   return (
     <div>
@@ -59,9 +61,9 @@ const CommunityPage:React.FC<Params> = async ({params:{id}}) => {
           <JoinCommunity id={community?.id!} user={user!} users={community?.users || []} userId={session?.user?.id!}/>
         </div>
       </div>
-      <div className="my-6 p-3">
-        <TweetPlaceholder communityId={community?.id.toString()} user={session?.user}/>
-      </div>
+      {userAlreadyJoined &&
+        <TweetPlaceholder communityId={community?.id.toString()} user={user!}/>
+      }
       <div>
         <CommunityPosts community={community!}/>
       </div>

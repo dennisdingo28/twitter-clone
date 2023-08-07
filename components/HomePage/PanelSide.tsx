@@ -11,7 +11,8 @@ import SideTweet from './SideTweet'
 
 const PanelSide = async () => {
   const session = await getAuthSession();
-  
+  console.log(encodeURIComponent(String(session?.user?.name)));
+    
   return (
     <div className='pb-5 border-r h-full border-darkGray flex-1'>
       <div className="flex h-[100%] flex-col items-center justify-between">
@@ -21,10 +22,9 @@ const PanelSide = async () => {
           </Link>
           <div className="links flex flex-col items-center justify-center xl:items-baseline gap-5">
               <NavItem icon={<Home size={30}/>} label='Home' link="/"/>
-              <NavItem icon={<Search size={30}/>} label='Explore' link="/explore"/>
               <NavItem icon={<Bookmark size={30}/>} label='Bookmarks' link="/bookmarks"/>
               <NavItem icon={<Users2Icon size={30}/>} label='Communities' link="/communities"/>
-              <NavItem icon={<User size={30}/>} label='Profile' link={`${session?.user?.name}`}/>
+              <NavItem icon={<User size={30}/>} label='Profile' link={`${encodeURIComponent(String(session?.user?.name))}`}/>
           </div>
           <SideTweet user={session?.user}/>
          

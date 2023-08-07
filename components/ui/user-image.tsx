@@ -12,8 +12,8 @@ interface UserImageProps extends HTMLAttributes<HTMLImageElement>{
 const UserImage: React.FC<UserImageProps> = ({imgUrl,link,className}) => {
   const router = useRouter();
   if(!link)
-    return <Image quality={100} src={imgUrl} width={50} height={40} alt="profile image" className={cn("rounded-full object-cover",className)}/>
-  return <Image quality={100} src={imgUrl} width={50} onClick={(e)=>{
+    return <Image quality={100} priority src={imgUrl} width={50} height={40} alt="profile image" className={cn("rounded-full object-cover",className)}/>
+  return <Image quality={100} priority src={imgUrl} width={50} onClick={(e)=>{
     e.stopPropagation();
     router.push(`${link}`)}} height={40} alt="profile image" className={cn("rounded-full object-cover",className)}/>
 }

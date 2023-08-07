@@ -35,7 +35,7 @@ export default async function RootLayout({
                   <div className="min-w-[100px] ml-0 xs:ml-[5%] md:ml-[10%] max-w-[100%]">
                     <PanelSide/>
                   </div>
-                  <div className="flex-1 h-screen overflow-y-scroll">
+                  <div className="flex-1 h-screen overflow-y-scroll contentScroll">
                     {children}
                   </div>
                   <div className="hidden lg:flex flex-1 h-screen overflow-y-hidden">
