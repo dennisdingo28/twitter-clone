@@ -4,7 +4,6 @@ import prismadb from "@/lib/db";
 export async function PATCH(req: NextRequest,{params}:{params:{id: string}}){
     try{
         const newUserProps = await req.json();
-        console.log("nup",newUserProps);
         
         await prismadb.user.updateMany({
             where:{

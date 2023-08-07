@@ -9,6 +9,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "../ui/button";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import Paragraph from "../ui/paragraph";
+import { Loader2 } from "lucide-react";
 
 
 interface LoginFormProps {
@@ -17,6 +19,7 @@ interface LoginFormProps {
 const LoginForm: React.FC<LoginFormProps> = ({setOpen}) => {
   const router = useRouter();
   const [showErrorMessage,setShowErrorMessage] = useState<boolean>(false);
+  const [isLoading,setIsLoading] = useState<boolean>(false);
 
   const {register, handleSubmit, formState:{errors}} = useForm({
     resolver:zodResolver(SignInValidator),
@@ -28,14 +31,16 @@ const LoginForm: React.FC<LoginFormProps> = ({setOpen}) => {
   console.log(errors);
   const handleLogin = async (data: SignInRequest)=>{
     try{
+      setIsLoading(true);
       const signInResponse = await signIn("credentials",{...data,redirect:false})   
       if(signInResponse?.error){
         throw new Error("Something went wrong. Please try again later!");
       }  
-      
+      setIsLoading(false);
       router.push("/");
     }catch(err){
       toast.error("Cannot login. Please try again later!");
+      setIsLoading(false);
     }
     setTimeout(()=>{
       setOpen(false);
@@ -60,8 +65,13 @@ const LoginForm: React.FC<LoginFormProps> = ({setOpen}) => {
           <FormInput name="password" placeholder="password" show={showErrorMessage} errMessage={errors.password?.message || ""} register={register}/>
         </div>
         <div className="flex mt-5 flex-col gap-2 justify-center mb-6">
-            <Button variant={"default"} className="w-[100%] rounded-sm p-2 cursor-pointer">Continue</Button>
-            <Button variant={"outline"}>Forgot password ?</Button>
+          <div className="flex items-center gap-2">
+            <Button variant={"default"} className={`w-[100%] rounded-sm p-2 cursor-pointer ${isLoading && "bg-darkBlue pointer-events-none"}`}>Continue</Button>
+            {isLoading && <Loader2 className="animate-spin text-white"/>}
+          </div>
+            <div className="border p-2 cursor-pointer border-lightBlue flex items-center justify-center text-white font-bold hover:border-darkBlue duration-100">
+              <Paragraph>Forgot Password ?</Paragraph>
+            </div>
         </div>
     </form>
   )

@@ -17,7 +17,6 @@ export async function PATCH(req: NextRequest, {params}:{params:{id: string}}){
 
         return NextResponse.json({msg:"Community was successfully updated!",ok:true},{status:200});
     }catch(err){
-        console.log("comerror",err);
         
         return new NextResponse("Something went wrong. Please try again later.",{status:500});
     }

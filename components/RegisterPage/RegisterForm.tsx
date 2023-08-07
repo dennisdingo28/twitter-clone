@@ -8,6 +8,7 @@ import { useMutation } from "@tanstack/react-query";
 import createAccount from "@/lib/createAccount";
 import FormInput from "../ui/formInput";
 import { toast } from "react-hot-toast";
+import { Loader2 } from "lucide-react";
 
 const RegisterForm = () => {
     const [showErrorMessage,setShowErrorMessage] = useState<boolean>(false);
@@ -24,7 +25,9 @@ const RegisterForm = () => {
   
   
   const {mutate:createUser, isLoading} = useMutation({
-    mutationFn: async (data: SignUpRequest) => await createAccount(data),
+    mutationFn: async (data: SignUpRequest) => {
+      await createAccount(data)
+    },
     onSuccess:(data: any)=>{
         console.log("created",data);
         toast.success(data.msg)
@@ -54,7 +57,10 @@ const RegisterForm = () => {
             <FormInput name="email" placeholder="email" show={showErrorMessage} errMessage={errors.email?.message || ""} register={register}/>
             <FormInput name="password" placeholder="password" show={showErrorMessage} errMessage={errors.password?.message || ""} register={register}/>
         </div>
-        <Button className={`w-full mt-4 p-2 rounded-sm ${isLoading && "pointer-events-none bg-darkBlue text-gray-300"}`}>Create account</Button>
+        <div className="flex items-center mt-4 gap-2">
+          <Button className={`w-full p-2 rounded-sm ${isLoading && "pointer-events-none bg-darkBlue text-gray-300"}`}>Create account</Button>
+          {isLoading && <Loader2 className="animate-spin text-white"/>}
+        </div>
     </form>
   )
 }

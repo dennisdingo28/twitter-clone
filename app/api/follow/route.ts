@@ -16,8 +16,6 @@ export async function POST(req: NextRequest){
             }
         });
 
-        console.log(newFollowingInstance);
-
         return NextResponse.json({msg:"New following instance",ok:true},{status:200});
 
     }catch(err){

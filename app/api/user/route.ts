@@ -7,7 +7,6 @@ import bcrypt from "bcrypt";
 export async function POST(req: NextRequest){
     try{
         const payload = await req.json();
-        console.log(payload);
         
         SignUpValidator.parse(payload);
         
@@ -35,7 +34,6 @@ export async function POST(req: NextRequest){
         payload.password = hashedPassword;
 
         const newUser = await prismadb.user.create({data:payload});
-        console.log(newUser);
         
         return NextResponse.json({msg:"Account was successfully created !"},{status:200});
     }catch(err){
