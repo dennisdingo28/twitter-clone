@@ -24,10 +24,10 @@ const PanelSide = async () => {
               <NavItem icon={<Users2Icon size={30}/>} label='Communities' link="/communities"/>
               <NavItem icon={<User size={30}/>} label='Profile' link={`${encodeURIComponent(String(session?.user?.name))}`}/>
           </div>
-          <SideTweet user={session?.user}/>
-         
+          <div className="sm:pr-1 sm:w-full">
+            <SideTweet user={session?.user}/>
+          </div>
         </div>
-        
         <div className="justify-self-end">
           <UserControl/>
         </div>

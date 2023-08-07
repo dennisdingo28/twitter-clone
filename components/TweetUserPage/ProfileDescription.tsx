@@ -25,27 +25,20 @@ const ProfileDescription:React.FC<UserProfileDescriptionProps> = ({user}) => {
             {user.bio}
         </div>
         <div className="flex gap-3">
-            {user.occupation.trim()!=='' && 
                 <div className="flex items-center gap-2">
                     <PiSuitcaseSimpleLight className="text-gray-400 w-[20px] h-[20px]"/>
-                    <span className="text-gray-500">{user.occupation}</span>
+                    <span className="text-gray-500">{user.occupation || "unknown"}</span>
                 </div>
-            }
-            {user.location.trim()!=='' &&
                 <div className="flex items-center gap-2">
                     <CiLocationOn className="text-gray-400 w-[20px] h-[20px]"/>
-                    <span className="text-gray-500">{user.location}</span>
+                    <span className="text-gray-500">{user.location || "unknown"}</span>
                 </div>  
-            }
-            {user.website.trim()!=='' &&
                 <div >
                     <Link href={user.website} className="flex items-center gap-2">
                         <PiBrowser className="text-gray-400 w-[20px] h-[20px]"/>
-                        <span className="text-lightBlue">{user.website}</span>
+                        <span className="text-lightBlue">{user.website || "unknown"}</span>
                     </Link>
                 </div> 
-            }
-            
         </div>
         <div className="">
             <div className="flex items-center gap-3">

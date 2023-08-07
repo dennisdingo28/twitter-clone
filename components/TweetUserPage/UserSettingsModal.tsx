@@ -14,6 +14,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface UserSettingsModalProps {
     open: boolean;
@@ -49,7 +50,7 @@ const UserSettingsModal: React.FC<UserSettingsModalProps> = ({open,handleClose,u
             await axios.patch(`/api/user/${user.id}`,{...data,imageUrl:profileImage,headerProfileImage})
         },
         onSuccess:()=>{
-            toast.success("Updated")
+            toast.success("Profile updated")
             setTimeout(()=>{
                 router.refresh();
             },750)
@@ -102,14 +103,16 @@ const UserSettingsModal: React.FC<UserSettingsModalProps> = ({open,handleClose,u
                                         open();
                                     }
                                     if(headerProfileImage.trim()!==""){
-                                        return <div className="flex items-center justify-center" onClick={onClick}>
-                                            <ProfileImage imgUrl={headerProfileImage} label="Header Profile Image"/>
+                                        return <div className="flex flex-col items-center justify-center cursor-pointer" onClick={onClick}>
+                                            <div className="w-[150px] h-[100px]">
+                                                <Image width={150} height={100} quality={100} className="rounded-md" priority src={headerProfileImage} alt="header profile image"/>
+                                            </div>
+                                            <Paragraph className="text-sm font-semibold">Header Profile Image</Paragraph>
                                         </div>
                                     }else{
-                                        return <div onClick={onClick} className="w-[80px] h-[80px] cursor-pointer bg-[#333639] flex flex-col items-center justify-center text-center">
+                                        return <div onClick={onClick} className="w-[150px] h-[100px] cursor-pointer bg-[#333639] flex flex-col items-center justify-center text-center">
                                             no image
                                             <Upload size={20} className=""/>
-
                                         </div>
                                     }
                                 }}

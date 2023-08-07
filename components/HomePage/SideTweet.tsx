@@ -17,11 +17,10 @@ const SideTweet: React.FC<SideTweetProps> = ({user}) => {
         setIsOpen(false);
     }
 
-
   return (
    <div className="w-full">
       <SideTweetModal user={user} isOpen={isOpen} onClose={onClose}/>
-     <Button onClick={()=>setIsOpen(true)} className='w-fit p-3 rounded-full mt-5 sm:hidden'>
+     <Button onClick={()=>setIsOpen(true)} className='w-fit mx-auto p-3 rounded-full mt-5 sm:hidden'>
         <TwitterIcon size={17}/>
     </Button>
     <Button onClick={()=>setIsOpen(true)} className="w-full p-3 rounded-full mt-5 hidden sm:block">Tweet</Button>
