@@ -29,13 +29,13 @@ export default async function RootLayout({
         <AuthProvider>
           <QueryProvider>
             <ToasterProivder/>
-            <body className="bg-black text-white">
+            <body className="bg-black text-white w-full">
               <Container>
-                <div className="flex h-screen">
-                  <div className="min-w-[100px] ml-0 md:ml-[10%] max-w-[100%]">
+                <div className="flex h-screen w-full">
+                  <div className="min-w-[100px] xl:flex-1">
                     <PanelSide/>
                   </div>
-                  <div className="flex-1 h-screen overflow-y-scroll contentScroll">
+                  <div className="flex-[1.2] h-screen w-full overflow-y-scroll contentScroll">
                     {children}
                   </div>
                   <div className="hidden lg:flex flex-1 h-screen overflow-y-hidden">

@@ -9,13 +9,12 @@ import SideTweet from './SideTweet'
 
 const PanelSide = async () => {
   const session = await getAuthSession();
-  console.log(encodeURIComponent(String(session?.user?.name)));
     
   return (
-    <div className='pb-5 border-r h-full border-darkGray flex-1'>
+    <div className='pb-5 border-r h-full border-darkGray xl:flex-1'>
       <div className="flex h-[100%] flex-col items-center justify-between">
-        <div className="flex flex-col items-center justify-center">
-          <Link href="/" className='xl:flex items-center justify-center'>
+        <div className="flex flex-col items-center justify-end">
+          <Link href="/" className='xl:flex items-center justify-end'>
             <Logo className='cursor-pointer w-[120px]'/>
           </Link>
           <div className="links flex flex-col items-center justify-center xl:items-baseline gap-5">

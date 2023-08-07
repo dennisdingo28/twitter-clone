@@ -15,10 +15,10 @@ const Hero = () => {
   }
 
   return (
-    <div className='mt-6 p-3'>
+    <div className='mt-4 p-3'>
         <CreateCommunityModal onUpload={onUpload} communityImage={communityImage} isOpen={isOpen} onClose={()=>setIsOpen(false)}/>
-        <div className="flex items-center justify-between">
-            <Paragraph className='text-[1.2em] font-extrabold max-w-[200px]'>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
+            <Paragraph className='text-[1.2em] text-center font-extrabold max-w-[200px]'>
                 Discover new Communities
             </Paragraph>
             <Button onClick={()=>setIsOpen(true)} className='rounded-full py-1 px-2 whitespace-nowrap'>
