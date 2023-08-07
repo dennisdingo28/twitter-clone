@@ -7,6 +7,7 @@ import Container from '@/components/ui/container'
 import PanelSide from '@/components/HomePage/PanelSide'
 import InfoPanel from '@/components/HomePage/InfoPanel'
 import { getAuthSession } from '@/lib/authOptions'
+import '../../globals.css';
 
 const inter = Inter({ subsets: ['latin'] })
 

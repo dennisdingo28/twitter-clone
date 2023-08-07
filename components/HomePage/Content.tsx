@@ -4,6 +4,7 @@ import ContentTabs from "./ContentTabs"
 import Header from "./Header"
 import TweetsContainer from "../TweetsContainer"
 import { Suspense } from "react"
+import Loading from "../ui/Loading"
 
 const Content = () => {
 
@@ -16,9 +17,7 @@ const Content = () => {
       <div className="p-3 border-b border-darkGray">
         <Header/>
       </div>
-      <Suspense fallback={<p className="text-center mt-4 font-bold text-[1.1em]">Loading the tweeets...</p>}>
-        <TweetsContainer/>
-      </Suspense>
+      <TweetsContainer/>
     </div>
   )
 }

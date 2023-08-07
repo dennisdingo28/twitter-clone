@@ -1,6 +1,7 @@
 import ContentTabs from "@/components/HomePage/ContentTabs"
 import Header from "@/components/HomePage/Header"
 import Tweets from "@/components/Tweets"
+import Loading from "@/components/ui/Loading"
 import Paragraph from "@/components/ui/paragraph"
 import { getAuthSession } from "@/lib/authOptions"
 import prismadb from "@/lib/db"
@@ -50,9 +51,7 @@ const FollowingTweets = async () => {
       <div className="p-3 border-b border-darkGray">
         <Header/>
       </div>
-      <Suspense fallback={<p className="text-center mt-4 font-bold text-[1.1em]">Loading the tweeets...</p>}>
-            <Tweets tweets={updatedTweets}/>
-      </Suspense>
+      <Tweets tweets={updatedTweets}/>
     </div>
   )
 }

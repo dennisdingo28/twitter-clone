@@ -9,11 +9,11 @@ const LoginModal: React.FC = () => {
     const [open,setOpen] = useState<boolean>(true);
     const onClose = () =>{
       setOpen(false);
-      window.location.reload();
+      window.location.href="/";
     }
   return (
     <Modal isOpen={open} setOpen={setOpen} onClose={onClose} modalTitle='Connect to Twitter' modalDescription="or">
-        <LoginForm/>
+        <LoginForm setOpen={setOpen}/>
        
         <small className="text-white text-start whitespace-nowrap">Not have an account? <Link href={"/register"} className="underline text-lightBlue">Create account</Link></small>
     </Modal>
