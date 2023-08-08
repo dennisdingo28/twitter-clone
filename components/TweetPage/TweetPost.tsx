@@ -42,6 +42,7 @@ const TweetPost:React.FC<TweetPostProps> = async ({accountName,tweetId}) => {
     return (
     <div>
         <Tweet tweet={tweet}/>
+        <Paragraph className="text-[1.1em] font-bold p-3 text-gray-500">Replies ({tweet.comments.length})</Paragraph>
         <div className="replySection flex flex-col">
             {tweet.comments.map(tweet=>(
                 <Link key={tweet.id} href={`/${tweet.user.username}`}>

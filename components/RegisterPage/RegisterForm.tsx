@@ -28,9 +28,8 @@ const RegisterForm = () => {
     mutationFn: async (data: SignUpRequest) => {
       await createAccount(data)
     },
-    onSuccess:(data: any)=>{
-        console.log("created",data);
-        toast.success(data.msg)
+    onSuccess:()=>{      
+        toast.success("Account was successfully created!");
     },
     onError:(err: any)=>{
         toast.error(err.response.data)

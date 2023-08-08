@@ -30,7 +30,7 @@ const Communities = async () => {
                 <Paragraph className='text-[.8em] text-[#71767b]'>@{session?.user?.name?.split(" ")[0]}{session?.user?.name?.split(" ")[1]}</Paragraph>
               </div>
           </div>
-            <Hero/>
+            <Hero userId={session?.user?.id!}/>
             <div className="flex flex-col mt-5">
               {communities.map((community)=>(
                 <Link key={community.id} href={`/communities/${community.id}`}>

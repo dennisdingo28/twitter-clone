@@ -14,29 +14,40 @@ import { useRouter } from 'next/navigation';
 
 interface CommunityModalProps {
     isOpen: boolean;
-    communityImage: string;
-    onUpload: Dispatch<SetStateAction<String>>;
     onClose: ()=> void;
+    userId: string;
 }
 
-const CreateCommunityModal: React.FC<CommunityModalProps> = ({communityImage,isOpen,onClose,onUpload}) => {
+const CreateCommunityModal: React.FC<CommunityModalProps> = ({isOpen,userId,onClose}) => {
     const router = useRouter();
 
     const [communityName,setCommunityName] = useState<string>("");
-    
+    const [communityImage,setCommunityImage] = useState<string>("");
+
+    const onUpload = (result: any) =>{
+        
+        setCommunityImage(result.info.secure_url)
+    }
     const {mutate: createCommunity,isLoading} = useMutation({
         mutationFn: async() =>{
             const res = await axios.post('/api/community',{
                 communityName,
                 communityImage,
             })
+            const join = await axios.post(`/api/community/${res.data.community.id}/join`,{
+                userId:userId,
+            })
         },
         onSuccess:()=>{
             toast.success("Community created!");
             router.refresh();
+            setCommunityImage("");
+            setCommunityName("");
         },
         onError:()=>{
             toast.error("Something went wrong. Please try again later!");
+            setCommunityImage("");
+            setCommunityName("");
         }
     })
 

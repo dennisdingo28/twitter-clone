@@ -11,12 +11,12 @@ export async function POST(req: NextRequest){
         TweetValidator.parse(newTweet);
 
         const tweet = await prismadb.tweet.create({data:{
-            ...newTweet
+            ...newTweet,
+            
         }});
         
         return NextResponse.json({msg:"Tweet was successfully created!",ok:true},{status:200});
     }catch(err){
-        console.log(err);
         if(err instanceof ZodError){
             return new NextResponse(err.issues[0].message)
         }

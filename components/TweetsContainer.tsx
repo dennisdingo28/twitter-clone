@@ -2,8 +2,6 @@ import { Tweet, User, Comment,Bookmark } from "@prisma/client";
 import Tweets from "./Tweets";
 import prismadb from "@/lib/db";
 
-
-
 const TweetsContainer: React.FC = async () => {
   const tweets:(Tweet & {
     user: User & {
@@ -26,7 +24,8 @@ const TweetsContainer: React.FC = async () => {
       createdAt: "desc",
     },
   });
-
+  console.log("FUCKING TWEETS",tweets);
+  
   return (
     <div>
       <Tweets tweets={tweets} />

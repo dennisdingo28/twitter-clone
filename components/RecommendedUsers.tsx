@@ -5,6 +5,7 @@ import { User } from "@prisma/client";
 import Button from "./ui/button";
 import FollowUser from "./TweetUserPage/FollowUser";
 import { FollowUserProps } from "./TweetUserPage/FollowUser";
+import Paragraph from "./ui/paragraph";
 
 const RecommendedUsers = async () => {
     const session = await getAuthSession();
@@ -50,16 +51,23 @@ const RecommendedUsers = async () => {
 
 
     return <div className="">
-        
-        {data.map((user)=>{
+        {data.length>0 ? (
+            <div className="">
+                    <Paragraph className="my-3 text-start text-[1em] text-gray-300">Recommended Users</Paragraph>
+                    {data.map((user)=>{
 
-            return (
-                <div className="flex items-center gap-5 hover:bg-[#16181c] cursor-pointer duration-150 rounded-md pr-2">
-                    <UserProfile id={user.id} username={user.username} twitterUsername={user.username.split(" ")[0]+user.username.split(" ")[1]} userImage={user.imageUrl}/>
-                    <FollowUser sessionUser={session?.user} user={user}/>
-                </div>
-            )
-        })}
+                        return (
+                            <div className="flex items-center gap-5 hover:bg-[#16181c] cursor-pointer duration-150 rounded-md pr-2">
+                                <UserProfile id={user.id} username={user.username} twitterUsername={user.username.split(" ")[0]+user.username.split(" ")[1]} userImage={user.imageUrl}/>
+                                <FollowUser sessionUser={session?.user} user={user}/>
+                            </div>
+                        )
+                    })}
+            </div>
+        ):(
+            <Paragraph className="text-center font-semibold text-gray-600">Not current recommandations</Paragraph>
+        )}
+       
        
     </div>;
 };

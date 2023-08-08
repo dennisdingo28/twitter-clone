@@ -21,7 +21,6 @@ export interface FollowUserProps {
 const FollowUser:React.FC<FollowUserProps> = ({sessionUser,user}) => {
     const router = useRouter();
 
-    console.log(sessionUser?.id,user);
     const alreadyFollowing = user.followers.filter(follower=>follower.userId===sessionUser?.id);
     
     const {mutate:followUser, isLoading} = useMutation({

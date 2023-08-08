@@ -49,7 +49,11 @@ const FollowingTweets = async () => {
       <div className="p-3 border-b border-darkGray">
         <Header/>
       </div>
-      <Tweets tweets={updatedTweets}/>
+      {updatedTweets.length>0 ? (
+        <Tweets tweets={updatedTweets}/>
+      ):(
+        <Paragraph className="text-center text-gray-600 font-semibold text-[1.1em]">Not following any users</Paragraph>
+      )}
     </div>
   )
 }

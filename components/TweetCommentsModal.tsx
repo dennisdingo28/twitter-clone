@@ -41,7 +41,6 @@ const TweetCommentsModal: React.FC<TweetCommentsModalProps> = ({
     const [image,setImage] = useState("");
 
     const onUpload = (result: any) =>{
-        console.log(result);
         
         setImage(result.info.secure_url);
     }

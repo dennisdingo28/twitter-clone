@@ -21,15 +21,17 @@ const TweetLikes:React.FC<TweetLikeProps> = ({tweet,user}) => {
     const router = useRouter();
 
   //like tweet
-  const [tweetLikes,setTweetLikes] = useState<Array<string>>(tweet.likes);  
-  const userLiked = tweetLikes.some((userId)=>userId===user?.id);
+  console.log("likes",tweet.likes);
   
-
+  const [tweetLikes,setTweetLikes] = useState<Array<string>>(tweet.likes || []);  
+  const userLiked = tweetLikes.some((userId)=>userId===user?.id) || false;
+  
+  console.log("TWEET LIKES",userLiked,tweet,user!.id);
+  
 
   const {mutate:handleTweetLike, isLoading} = useMutation({
     mutationFn:async ()=>{
       await likeTweet(tweet.id,tweetLikes);
-      return null;
     },
     onSuccess:()=>{
       router.refresh();
@@ -37,6 +39,8 @@ const TweetLikes:React.FC<TweetLikeProps> = ({tweet,user}) => {
     onError: ()=>{
       const filteredLikes = tweetLikes.filter(userId=>userId!==user?.id);
       setTweetLikes(filteredLikes);
+      router.refresh();
+
     }
   });
 
@@ -59,7 +63,7 @@ const TweetLikes:React.FC<TweetLikeProps> = ({tweet,user}) => {
               ]
             })
           }
-        }} textData={String(tweetLikes.length)} icon={<Heart size={40} className={`text-[#9CA093] group-hover:text-[#F91880] group-hover:bg-[#200914] rounded-full p-2 duration-150 ${userLiked && "text-[#F91880]"}`}/>}/>
+        }} textData={String(tweetLikes.length || 0)} icon={<Heart size={40} className={`text-[#9CA093] group-hover:text-[#F91880] group-hover:bg-[#200914] rounded-full p-2 duration-150 ${userLiked && "text-[#F91880]"}`}/>}/>
     </>
   )
 }

@@ -55,6 +55,7 @@ const TweetPlaceholder: React.FC<TweetPlaceholderProps> = ({user,communityId}) =
         toast.error(err.response.data);
       else
         toast.error("Something went wrong while trying to create the tweet");
+        router.refresh();
     }
   })
 

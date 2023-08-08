@@ -9,14 +9,14 @@ export async function POST(req: NextRequest){
         
         CommunityValidator.parse(payload);
 
-        await prismadb.community.create({
+        const community = await prismadb.community.create({
             data:{
                 name:payload.communityName,
                 imageUrl:payload.communityImage || "/community.png",
             }
         });
 
-        return NextResponse.json({msg:"Community was successfully created.",ok:true},{status:200});
+        return NextResponse.json({msg:"Community was successfully created.",community:community,ok:true},{status:200});
 
     }catch(err){
         if(err instanceof ZodError){

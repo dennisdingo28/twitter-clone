@@ -51,12 +51,12 @@ model Tweet {
   userId           String
   tweetDescription String
   uploadUrl        String
-  likes            String[]
+  likes            String[]   @default([])
   createdAt        DateTime  @default(now())
   user             User?     @relation("UserTweets", fields: [userId], references: [id])
   bookmarks        Bookmark[] @relation("BookmarkTweet")
   comments         Comment[]
-  visits           String[]
+  visits           String[] @default([])
   communityId      String?
   community        Community? @relation(fields: [communityId],references: [id]) 
   

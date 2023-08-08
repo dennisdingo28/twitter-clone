@@ -41,8 +41,6 @@ function formatElapsedTime(createdAt: Date): string {
 }
   
 
-  
-
 const Tweet: React.FC<TweetProps> = async ({tweet}) => {
     const session = await getAuthSession();
     const targetUser = await prismadb.user.findUnique({

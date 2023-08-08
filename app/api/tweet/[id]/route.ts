@@ -4,8 +4,9 @@ import { NextRequest, NextResponse } from "next/server";
 export async function PATCH(req: NextRequest, {params}:{params:{id: string}}){
     try{
         const newTweetProps = await req.json();
+        console.log("mtp",newTweetProps);
         
-        await prismadb.tweet.updateMany({
+        await prismadb.tweet.update({
             where:{
                 id: params.id,
             },

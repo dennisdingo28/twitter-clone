@@ -11,7 +11,6 @@ interface SearchUserResultsProps extends HTMLAttributes<HTMLDivElement>{
 }
 
 const SearchUserResults: React.FC<SearchUserResultsProps> = ({data, className}) =>{
-    console.log(data);
     
     return(
         <div className={className}>
